@@ -5,7 +5,7 @@ description: Complete documentation for Event Sentinel - A professional Discord 
 # For user/organization pages: url: https://username.github.io, baseurl: ""
 # For project pages: url: https://username.github.io, baseurl: "/repository-name"
 url: https://hugsndnugs.github.io
-baseurl: /Event-Sentinel-docs
+baseurl: /Event-Sentinel
 
 # Theme settings
 remote_theme: just-the-docs/just-the-docs
@@ -26,14 +26,14 @@ search:
 # Aux links for the upper right navigation
 aux_links:
   "Event Sentinel on GitHub":
-    - "https://github.com/hugsndnugs/Event-Sentinel-bot-main"
+    - "https://github.com/hugsndnugs/Event-Sentinel"
 
 # Footer content
 footer_content: "Event Sentinel Documentation - Last updated: <time datetime='2025-11-25T00:00:00Z'>November 2025</time>"
 
 # GitHub repository
 github:
-  repository_url: https://github.com/hugsndnugs/Event-Sentinel-bot-main
+  repository_url: https://github.com/hugsndnugs/Event-Sentinel
 
 # Logo
 logo: "/assets/images/logo.png"

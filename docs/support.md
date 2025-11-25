@@ -36,7 +36,7 @@ Most issues can be resolved by checking:
 
 Please check:
 - ✅ The [FAQ]({{ site.baseurl }}/faq/) for common solutions
-- ✅ Existing [GitHub Issues](https://github.com/hugsndnugs/Event-Sentinel-bot-main/issues) for similar problems
+- ✅ Existing [GitHub Issues](https://github.com/hugsndnugs/Event-Sentinel/issues) for similar problems
 - ✅ That you're using the latest version
 - ✅ Your configuration and setup
 
@@ -72,9 +72,9 @@ When creating an issue on GitHub, use the appropriate template if available:
 
 ### Official Channels
 
-- **GitHub Repository:** [Event-Sentinel-bot-main](https://github.com/hugsndnugs/Event-Sentinel-bot-main)
-- **Issues:** [GitHub Issues](https://github.com/hugsndnugs/Event-Sentinel-bot-main/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/hugsndnugs/Event-Sentinel-bot-main/discussions) (if available)
+- **GitHub Repository:** [Event-Sentinel](https://github.com/hugsndnugs/Event-Sentinel)
+- **Issues:** [GitHub Issues](https://github.com/hugsndnugs/Event-Sentinel/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/hugsndnugs/Event-Sentinel/discussions) (if available)
 
 ## Troubleshooting Steps
 
@@ -178,5 +178,5 @@ Please be patient, as this is a community project maintained by volunteers.
 
 ---
 
-**Need immediate help?** Check the [FAQ]({{ site.baseurl }}/faq/) first, then [open an issue](https://github.com/hugsndnugs/Event-Sentinel-bot-main/issues) on GitHub.
+**Need immediate help?** Check the [FAQ]({{ site.baseurl }}/faq/) first, then [open an issue](https://github.com/hugsndnugs/Event-Sentinel/issues) on GitHub.
 

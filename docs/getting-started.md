@@ -50,8 +50,8 @@ The bot needs the following permissions to function properly:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/hugsndnugs/Event-Sentinel-bot-main.git
-cd Event-Sentinel-bot-main
+git clone https://github.com/hugsndnugs/Event-Sentinel.git
+cd Event-Sentinel
 ```
 
 ### Install Dependencies
@@ -208,5 +208,5 @@ Test that Event Sentinel is working:
 
 ---
 
-**Need help?** Visit our [Support]({{ site.baseurl }}/support/) page or [open an issue](https://github.com/hugsndnugs/Event-Sentinel-bot-main/issues) on GitHub.
+**Need help?** Visit our [Support]({{ site.baseurl }}/support/) page or [open an issue](https://github.com/hugsndnugs/Event-Sentinel/issues) on GitHub.
 

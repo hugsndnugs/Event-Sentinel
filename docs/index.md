@@ -40,7 +40,7 @@ Event Sentinel is a comprehensive Discord bot designed to help server administra
 
 - 📖 [Documentation]({{ site.baseurl }}/getting-started/) - Comprehensive guides
 - ❓ [FAQ]({{ site.baseurl }}/faq/) - Common questions and answers
-- 🐛 [Report Issues](https://github.com/hugsndnugs/Event-Sentinel-bot-main/issues) - Found a bug?
+- 🐛 [Report Issues](https://github.com/hugsndnugs/Event-Sentinel/issues) - Found a bug?
 - 💬 [Support]({{ site.baseurl }}/support/) - Need additional help?
 
 ## Legal

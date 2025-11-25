@@ -157,7 +157,7 @@ If you encounter issues with commands:
 
 1. Check the [FAQ]({{ site.baseurl }}/faq/) for common issues
 2. Visit the [Support]({{ site.baseurl }}/support/) page
-3. [Open an issue](https://github.com/hugsndnugs/Event-Sentinel-bot-main/issues) on GitHub
+3. [Open an issue](https://github.com/hugsndnugs/Event-Sentinel/issues) on GitHub
 
 ---
 

@@ -191,7 +191,7 @@ No, Event Sentinel requires discord.py 2.4 or higher.
 
 - 📖 Check the [Documentation]({{ site.baseurl }}/getting-started/)
 - ❓ Review this FAQ
-- 🐛 [Open an issue](https://github.com/hugsndnugs/Event-Sentinel-bot-main/issues) on GitHub
+- 🐛 [Open an issue](https://github.com/hugsndnugs/Event-Sentinel/issues) on GitHub
 - 💬 Visit the [Support]({{ site.baseurl }}/support/) page
 
 ### How do I report a bug?
@@ -210,5 +210,5 @@ Yes! Contributions are welcome. Please check the repository for contribution gui
 
 ---
 
-**Still have questions?** Visit our [Support]({{ site.baseurl }}/support/) page or [open an issue](https://github.com/hugsndnugs/Event-Sentinel-bot-main/issues) on GitHub.
+**Still have questions?** Visit our [Support]({{ site.baseurl }}/support/) page or [open an issue](https://github.com/hugsndnugs/Event-Sentinel/issues) on GitHub.
 
