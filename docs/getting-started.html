@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - Event Sentinel Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🛡️ Event Sentinel</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="getting-started.html" class="active">Getting Started</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="setup.html">Developer Setup</a></li>
+                <li><a href="configuration.html">Configuration</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="terms.html">Terms</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="content">
+            <h1>Getting Started with Event Sentinel</h1>
+            <p class="subtitle">Welcome! This guide will help you set up Event Sentinel in your Discord server using simple bot commands. No coding required!</p>
+
+            <div class="info-box" style="background: #E3F2FD; border-left: 4px solid #2196F3; padding: 1rem; margin: 2rem 0; border-radius: 4px;">
+                <p><strong>👋 New to Event Sentinel?</strong> This guide is for Discord server administrators who want to use the bot. If you're a developer looking to host your own instance, see the <a href="setup.html">Developer Setup</a> guide instead.</p>
+            </div>
+
+            <section class="section">
+                <h2>Step 1: Add Event Sentinel to Your Server</h2>
+                <p>Before you can use Event Sentinel, it needs to be added to your Discord server. If the bot is already in your server, skip to Step 2.</p>
+                
+                <h3>If you're using a hosted version:</h3>
+                <ol>
+                    <li>Contact the bot host or check their website for an invite link</li>
+                    <li>Click the invite link and select your server</li>
+                    <li>Authorize the bot with the required permissions</li>
+                </ol>
+
+                <h3>Required Permissions:</h3>
+                <p>Event Sentinel needs these permissions to function properly:</p>
+                <ul>
+                    <li>✅ View Channels</li>
+                    <li>✅ Send Messages</li>
+                    <li>✅ Embed Links</li>
+                    <li>✅ Attach Files</li>
+                    <li>✅ Read Message History</li>
+                    <li>✅ View Audit Log (to capture moderator information)</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Step 2: Create a Logging Channel</h2>
+                <p>Before configuring the bot, you should create a dedicated channel for event logs. This keeps your logs organized and separate from regular chat.</p>
+                
+                <ol>
+                    <li>In your Discord server, create a new text channel (e.g., <code>#event-logs</code> or <code>#mod-logs</code>)</li>
+                    <li>Make sure the channel is visible to administrators or moderators (you can restrict it to specific roles if needed)</li>
+                    <li><strong>Important:</strong> Ensure Event Sentinel has permission to send messages in this channel</li>
+                </ol>
+
+                <div class="info-box" style="background: #FFF3E0; border-left: 4px solid #FF9800; padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                    <p><strong>💡 Tip:</strong> You can create a private channel that only administrators can see, or make it visible to moderators. The choice is yours!</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Step 3: Configure the Log Channel</h2>
+                <p>Now it's time to tell Event Sentinel where to send the logs. This is done with a simple command!</p>
+                
+                <h3>Using the /setlogchannel Command</h3>
+                <ol>
+                    <li>In your Discord server, type <code>/setlogchannel</code> in any channel</li>
+                    <li>You'll see a dropdown menu - select the channel where you want logs to be sent</li>
+                    <li>Press Enter or click the channel option</li>
+                    <li>The bot will confirm that the log channel has been set!</li>
+                </ol>
+
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 1rem 0;">
+                    <strong>Example:</strong><br>
+                    <code>/setlogchannel</code> → Select <code>#event-logs</code> from the dropdown
+                </div>
+
+                <div class="info-box" style="background: #E8F5E9; border-left: 4px solid #4CAF50; padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                    <p><strong>✅ Permission Required:</strong> You must be a server administrator to use this command. If you don't have administrator permissions, ask your server owner to run this command.</p>
+                </div>
+
+                <h3>What Happens Next?</h3>
+                <p>Once you've set the log channel, Event Sentinel will immediately start logging events to that channel. You don't need to restart anything or run additional commands!</p>
+            </section>
+
+            <section class="section">
+                <h2>Step 4: Verify It's Working</h2>
+                <p>To make sure everything is set up correctly, try one of these actions in your server:</p>
+                <ul>
+                    <li>Have someone join or leave the server</li>
+                    <li>Edit or delete a message</li>
+                    <li>Change a channel name or settings</li>
+                    <li>Add or remove a role</li>
+                </ul>
+                <p>You should see a detailed log message appear in your configured log channel!</p>
+            </section>
+
+            <section class="section">
+                <h2>Multiple Servers?</h2>
+                <p>Event Sentinel supports multiple Discord servers! Each server has its own independent configuration.</p>
+                <ol>
+                    <li>Add Event Sentinel to each server you want to monitor</li>
+                    <li>Run <code>/setlogchannel</code> in each server</li>
+                    <li>Select a different log channel for each server (or use the same channel name - it's up to you!)</li>
+                </ol>
+                <p><strong>Note:</strong> Each server's configuration is completely separate. Changing the log channel in one server won't affect the others.</p>
+            </section>
+
+            <section class="section">
+                <h2>Changing Your Log Channel</h2>
+                <p>Need to change where logs are sent? No problem!</p>
+                <ol>
+                    <li>Simply run <code>/setlogchannel</code> again</li>
+                    <li>Select the new channel</li>
+                    <li>The bot will immediately start sending logs to the new channel</li>
+                </ol>
+                <p>You can change the log channel as many times as you need.</p>
+            </section>
+
+            <section class="section">
+                <h2>Troubleshooting</h2>
+                
+                <h3>Bot isn't logging events</h3>
+                <ul>
+                    <li>✅ Check that you've run <code>/setlogchannel</code> and selected a channel</li>
+                    <li>✅ Verify the bot has permission to send messages in the log channel</li>
+                    <li>✅ Make sure the bot has "View Audit Log" permission in your server</li>
+                    <li>✅ Check that the bot is online (look for the green status indicator)</li>
+                </ul>
+
+                <h3>Can't use the /setlogchannel command</h3>
+                <ul>
+                    <li>✅ You must be a server administrator to use this command</li>
+                    <li>✅ Make sure the bot has been properly added to your server</li>
+                    <li>✅ Try typing <code>/</code> and see if the command appears in the list</li>
+                </ul>
+
+                <h3>Logs are missing information</h3>
+                <ul>
+                    <li>✅ Ensure the bot has "View Audit Log" permission (needed for moderator information)</li>
+                    <li>✅ Some events may not have audit log entries if they happened before the bot was added</li>
+                </ul>
+            </section>
+
+            <div class="cta-section">
+                <h2>What's Next?</h2>
+                <p>Now that you're set up, learn about all the events Event Sentinel can log!</p>
+                <a href="features.html" class="btn btn-primary">View All Features</a>
+                <a href="configuration.html" class="btn" style="background: #6C757D; margin-left: 1rem;">Advanced Configuration</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Event Sentinel. Developed by HugsNdNugs.</p>
+    </footer>
+</body>
+</html>
+

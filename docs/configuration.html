@@ -14,8 +14,9 @@
             </div>
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
+                <li><a href="getting-started.html">Getting Started</a></li>
                 <li><a href="features.html">Features</a></li>
-                <li><a href="setup.html">Setup</a></li>
+                <li><a href="setup.html">Developer Setup</a></li>
                 <li><a href="configuration.html" class="active">Configuration</a></li>
                 <li><a href="privacy.html">Privacy</a></li>
                 <li><a href="terms.html">Terms</a></li>
@@ -26,15 +27,19 @@
     <main class="container">
         <div class="content">
             <h1>Configuration Guide</h1>
-            <p>Event Sentinel supports flexible configuration options to customize logging behavior for your server.</p>
+            <p>This guide covers both user-facing commands and advanced developer configuration options for Event Sentinel.</p>
+
+            <div class="info-box" style="background: #E3F2FD; border-left: 4px solid #2196F3; padding: 1rem; margin: 2rem 0; border-radius: 4px;">
+                <p><strong>👥 For Server Administrators:</strong> Most configuration can be done using the <code>/setlogchannel</code> command. See the <a href="getting-started.html">Getting Started</a> guide for simple setup instructions.</p>
+            </div>
 
             <section class="section">
-                <h2>Configuration Layouts</h2>
+                <h3>Configuration Layouts</h3>
                 <p>The bot supports two configuration layouts. The loader prefers the modular <code>config/</code> layout if present, and falls back to the legacy <code>config.json</code>.</p>
             </section>
 
             <section class="section">
-                <h2>Preferred: config/ Directory (Modular)</h2>
+                <h3>Preferred: config/ Directory (Modular)</h3>
                 <p>This is the recommended configuration method. It organizes settings into separate files for better management.</p>
                 
                 <h3>File Structure</h3>
@@ -82,34 +87,63 @@
             </section>
 
             <section class="section">
-                <h2>Legacy: config.json (Monolithic)</h2>
+                <h3>Legacy: config.json (Monolithic)</h3>
                 <p>You may keep a single <code>config.json</code> with the combined structure. The bot will still read it if <code>config/</code> is absent. The application also mirrors the composed configuration back to <code>config.json</code> when saving, for compatibility.</p>
             </section>
 
             <section class="section">
-                <h2>Multi-Guild Support</h2>
+                <h2>Multi-Server Support</h2>
                 <p>The bot fully supports multiple Discord servers! Each server can have its own dedicated log channel, configured independently using <code>/setlogchannel</code>.</p>
+                
+                <h3>For Server Administrators:</h3>
                 <p>When you add Event Sentinel to multiple servers:</p>
                 <ol>
                     <li>Run <code>/setlogchannel</code> in each server</li>
                     <li>Select the desired log channel for that server</li>
                     <li>Each server's configuration is stored separately</li>
                 </ol>
+                <p><strong>Note:</strong> You don't need to configure anything special - just run the command in each server and select the appropriate channel!</p>
             </section>
 
             <section class="section">
-                <h2>Commands</h2>
+                <h2>User Commands</h2>
+                <p>These commands are available to Discord server administrators for configuring Event Sentinel.</p>
+                
                 <h3>/setlogchannel</h3>
-                <p>Set the log channel for the current server.</p>
+                <p>The primary command for setting up Event Sentinel in your server.</p>
                 <ul>
-                    <li><strong>Permission:</strong> Administrator only</li>
-                    <li><strong>Usage:</strong> <code>/setlogchannel &lt;channel&gt;</code></li>
-                    <li><strong>Description:</strong> Configures which channel Event Sentinel will use to log events for this server</li>
+                    <li><strong>Permission Required:</strong> Administrator</li>
+                    <li><strong>Usage:</strong> Type <code>/setlogchannel</code> and select a channel from the dropdown</li>
+                    <li><strong>Description:</strong> Configures which channel Event Sentinel will use to log events for the current server</li>
+                    <li><strong>When to use:</strong> 
+                        <ul>
+                            <li>Initial setup - when first adding the bot to your server</li>
+                            <li>Changing log channels - if you want to move logs to a different channel</li>
+                            <li>Multi-server setup - run this command in each server you want to monitor</li>
+                        </ul>
+                    </li>
                 </ul>
+
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 1rem 0;">
+                    <strong>Step-by-step:</strong><br>
+                    1. Type <code>/setlogchannel</code> in any channel<br>
+                    2. A channel selector will appear<br>
+                    3. Click on the channel where you want logs sent<br>
+                    4. The bot will confirm the channel has been set
+                </div>
+
+                <div class="info-box" style="background: #E8F5E9; border-left: 4px solid #4CAF50; padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                    <p><strong>✅ Important:</strong> Make sure the bot has permission to send messages in the channel you select. The bot needs "Send Messages" and "Embed Links" permissions in that channel.</p>
+                </div>
             </section>
 
             <section class="section">
-                <h2>Architecture</h2>
+                <h2>Advanced Configuration (For Developers)</h2>
+                <p>The following configuration options are for developers hosting their own bot instance. End users don't need to modify these files.</p>
+            </section>
+
+            <section class="section">
+                <h3>Architecture (Developer Information)</h3>
                 <p>The bot uses a modular cog-based structure:</p>
                 <div class="code-block">
                     <code>event-sentinel/<br>
@@ -127,21 +161,43 @@
             </section>
 
             <section class="section">
+                <h2>Common Questions</h2>
+                
+                <h3>How do I change the log channel?</h3>
+                <p>Simply run <code>/setlogchannel</code> again and select a different channel. The bot will immediately start sending logs to the new channel.</p>
+
+                <h3>Can I have different log channels for different event types?</h3>
+                <p>Currently, Event Sentinel uses one log channel per server for all event types. All events will be sent to the channel you configure with <code>/setlogchannel</code>.</p>
+
+                <h3>What if I remove the bot and add it back?</h3>
+                <p>You'll need to run <code>/setlogchannel</code> again to reconfigure the log channel. The bot doesn't remember previous configurations after being removed.</p>
+
+                <h3>Can I disable certain event types?</h3>
+                <p>Currently, all event types are logged when enabled. Advanced event filtering may be available in future updates. For now, all configured events will be logged to your selected channel.</p>
+            </section>
+
+            <section class="section">
                 <h2>Error Handling</h2>
                 <p>The bot gracefully handles:</p>
                 <ul>
-                    <li>Missing permissions</li>
-                    <li>Missing audit log entries</li>
-                    <li>Unavailable log channels</li>
-                    <li>Rate limiting</li>
+                    <li>Missing permissions - The bot will attempt to log events but may show limited information</li>
+                    <li>Missing audit log entries - Some events may not include moderator information</li>
+                    <li>Unavailable log channels - The bot will continue running but won't be able to send logs</li>
+                    <li>Rate limiting - The bot automatically handles Discord's rate limits</li>
                 </ul>
-                <p>Errors are logged to console for debugging.</p>
+                <p>If you notice events aren't being logged, check that:</p>
+                <ul>
+                    <li>The bot has permission to send messages in the log channel</li>
+                    <li>The log channel is properly configured with <code>/setlogchannel</code></li>
+                    <li>The bot has "View Audit Log" permission in your server</li>
+                </ul>
             </section>
 
             <div class="cta-section">
                 <h2>Need Help?</h2>
-                <p>If you're having trouble with configuration, check the setup guide or review the features documentation.</p>
-                <a href="setup.html" class="btn btn-primary">View Setup Guide</a>
+                <p>If you're a server administrator, check the Getting Started guide. Developers can refer to the Developer Setup guide.</p>
+                <a href="getting-started.html" class="btn btn-primary">Getting Started Guide</a>
+                <a href="setup.html" class="btn" style="background: #6C757D; margin-left: 1rem;">Developer Setup</a>
             </div>
         </div>
     </main>
