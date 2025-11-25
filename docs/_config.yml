@@ -15,7 +15,8 @@ plugins:
   - jekyll-remote-theme
 
 # Color scheme: "light" (default), "dark", or "auto"
-color_scheme: auto
+# Note: "auto" may require local SCSS files; using "light" for compatibility
+color_scheme: dark
 
 # Search
 search_enabled: true
