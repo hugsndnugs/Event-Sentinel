@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration - Event Sentinel Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🛡️ Event Sentinel</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="setup.html">Setup</a></li>
+                <li><a href="configuration.html" class="active">Configuration</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="terms.html">Terms</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="content">
+            <h1>Configuration Guide</h1>
+            <p>Event Sentinel supports flexible configuration options to customize logging behavior for your server.</p>
+
+            <section class="section">
+                <h2>Configuration Layouts</h2>
+                <p>The bot supports two configuration layouts. The loader prefers the modular <code>config/</code> layout if present, and falls back to the legacy <code>config.json</code>.</p>
+            </section>
+
+            <section class="section">
+                <h2>Preferred: config/ Directory (Modular)</h2>
+                <p>This is the recommended configuration method. It organizes settings into separate files for better management.</p>
+                
+                <h3>File Structure</h3>
+                <p>All files in the <code>config/</code> directory are optional:</p>
+                <ul>
+                    <li><code>config/base.json</code> - Global defaults</li>
+                    <li><code>config/colors.json</code> - Embed colors map</li>
+                    <li><code>config/guilds.json</code> - Per-guild log channels</li>
+                    <li><code>config/toggles.json</code> - Per-guild event toggles</li>
+                </ul>
+
+                <h3>Example: colors.json</h3>
+                <p>Define custom colors for different event categories:</p>
+                <div class="code-block">
+                    <code>{<br>
+&nbsp;&nbsp;"moderation": "0xE74C3C",<br>
+&nbsp;&nbsp;"channel": "0x3498DB",<br>
+&nbsp;&nbsp;"voice": "0x9B59B6",<br>
+&nbsp;&nbsp;"message": "0x2ECC71",<br>
+&nbsp;&nbsp;"server": "0xF39C12",<br>
+&nbsp;&nbsp;"role": "0x3498DB"<br>
+}</code>
+                </div>
+
+                <h3>Example: guilds.json</h3>
+                <p>Map server IDs to their log channel IDs:</p>
+                <div class="code-block">
+                    <code>{<br>
+&nbsp;&nbsp;"123456789012345678": 987654321098765432<br>
+}</code>
+                </div>
+                <p><strong>Note:</strong> You can also use the <code>/setlogchannel</code> command to configure this automatically.</p>
+
+                <h3>Example: toggles.json</h3>
+                <p>Enable or disable specific events per server:</p>
+                <div class="code-block">
+                    <code>{<br>
+&nbsp;&nbsp;"123456789012345678": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"voice": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"self_unmute": false<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}</code>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Legacy: config.json (Monolithic)</h2>
+                <p>You may keep a single <code>config.json</code> with the combined structure. The bot will still read it if <code>config/</code> is absent. The application also mirrors the composed configuration back to <code>config.json</code> when saving, for compatibility.</p>
+            </section>
+
+            <section class="section">
+                <h2>Multi-Guild Support</h2>
+                <p>The bot fully supports multiple Discord servers! Each server can have its own dedicated log channel, configured independently using <code>/setlogchannel</code>.</p>
+                <p>When you add Event Sentinel to multiple servers:</p>
+                <ol>
+                    <li>Run <code>/setlogchannel</code> in each server</li>
+                    <li>Select the desired log channel for that server</li>
+                    <li>Each server's configuration is stored separately</li>
+                </ol>
+            </section>
+
+            <section class="section">
+                <h2>Commands</h2>
+                <h3>/setlogchannel</h3>
+                <p>Set the log channel for the current server.</p>
+                <ul>
+                    <li><strong>Permission:</strong> Administrator only</li>
+                    <li><strong>Usage:</strong> <code>/setlogchannel &lt;channel&gt;</code></li>
+                    <li><strong>Description:</strong> Configures which channel Event Sentinel will use to log events for this server</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Architecture</h2>
+                <p>The bot uses a modular cog-based structure:</p>
+                <div class="code-block">
+                    <code>event-sentinel/<br>
+├── main.py              # Bot initialization and startup<br>
+├── utils.py             # Shared utility functions<br>
+├── config.json          # Bot configuration<br>
+├── cogs/<br>
+│   ├── moderation.py    # Member and moderation events<br>
+│   ├── voice.py         # Voice channel events<br>
+│   ├── message.py       # Message events<br>
+│   ├── server.py        # Server and invite events<br>
+│   ├── roles.py         # Role events<br>
+│   └── channels.py      # Channel and thread events</code>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Error Handling</h2>
+                <p>The bot gracefully handles:</p>
+                <ul>
+                    <li>Missing permissions</li>
+                    <li>Missing audit log entries</li>
+                    <li>Unavailable log channels</li>
+                    <li>Rate limiting</li>
+                </ul>
+                <p>Errors are logged to console for debugging.</p>
+            </section>
+
+            <div class="cta-section">
+                <h2>Need Help?</h2>
+                <p>If you're having trouble with configuration, check the setup guide or review the features documentation.</p>
+                <a href="setup.html" class="btn btn-primary">View Setup Guide</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Event Sentinel. Developed by HugsNdNugs.</p>
+    </footer>
+</body>
+</html>
+
