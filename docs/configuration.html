@@ -34,64 +34,6 @@
             </div>
 
             <section class="section">
-                <h3>Configuration Layouts</h3>
-                <p>The bot supports two configuration layouts. The loader prefers the modular <code>config/</code> layout if present, and falls back to the legacy <code>config.json</code>.</p>
-            </section>
-
-            <section class="section">
-                <h3>Preferred: config/ Directory (Modular)</h3>
-                <p>This is the recommended configuration method. It organizes settings into separate files for better management.</p>
-                
-                <h3>File Structure</h3>
-                <p>All files in the <code>config/</code> directory are optional:</p>
-                <ul>
-                    <li><code>config/base.json</code> - Global defaults</li>
-                    <li><code>config/colors.json</code> - Embed colors map</li>
-                    <li><code>config/guilds.json</code> - Per-guild log channels</li>
-                    <li><code>config/toggles.json</code> - Per-guild event toggles</li>
-                </ul>
-
-                <h3>Example: colors.json</h3>
-                <p>Define custom colors for different event categories:</p>
-                <div class="code-block">
-                    <code>{<br>
-&nbsp;&nbsp;"moderation": "0xE74C3C",<br>
-&nbsp;&nbsp;"channel": "0x3498DB",<br>
-&nbsp;&nbsp;"voice": "0x9B59B6",<br>
-&nbsp;&nbsp;"message": "0x2ECC71",<br>
-&nbsp;&nbsp;"server": "0xF39C12",<br>
-&nbsp;&nbsp;"role": "0x3498DB"<br>
-}</code>
-                </div>
-
-                <h3>Example: guilds.json</h3>
-                <p>Map server IDs to their log channel IDs:</p>
-                <div class="code-block">
-                    <code>{<br>
-&nbsp;&nbsp;"123456789012345678": 987654321098765432<br>
-}</code>
-                </div>
-                <p><strong>Note:</strong> You can also use the <code>/setlogchannel</code> command to configure this automatically.</p>
-
-                <h3>Example: toggles.json</h3>
-                <p>Enable or disable specific events per server:</p>
-                <div class="code-block">
-                    <code>{<br>
-&nbsp;&nbsp;"123456789012345678": {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;"voice": {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"self_unmute": false<br>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;}<br>
-}</code>
-                </div>
-            </section>
-
-            <section class="section">
-                <h3>Legacy: config.json (Monolithic)</h3>
-                <p>You may keep a single <code>config.json</code> with the combined structure. The bot will still read it if <code>config/</code> is absent. The application also mirrors the composed configuration back to <code>config.json</code> when saving, for compatibility.</p>
-            </section>
-
-            <section class="section">
                 <h2>Multi-Server Support</h2>
                 <p>The bot fully supports multiple Discord servers! Each server can have its own dedicated log channel, configured independently using <code>/setlogchannel</code>.</p>
                 
@@ -106,34 +48,143 @@
             </section>
 
             <section class="section">
-                <h2>User Commands</h2>
-                <p>These commands are available to Discord server administrators for configuring Event Sentinel.</p>
-                
-                <h3>/setlogchannel</h3>
-                <p>The primary command for setting up Event Sentinel in your server.</p>
-                <ul>
-                    <li><strong>Permission Required:</strong> Administrator</li>
-                    <li><strong>Usage:</strong> Type <code>/setlogchannel</code> and select a channel from the dropdown</li>
-                    <li><strong>Description:</strong> Configures which channel Event Sentinel will use to log events for the current server</li>
-                    <li><strong>When to use:</strong> 
-                        <ul>
-                            <li>Initial setup - when first adding the bot to your server</li>
-                            <li>Changing log channels - if you want to move logs to a different channel</li>
-                            <li>Multi-server setup - run this command in each server you want to monitor</li>
-                        </ul>
-                    </li>
-                </ul>
+                <h2>All Available Commands</h2>
+                <p>Event Sentinel provides a comprehensive set of commands for configuration, customization, and monitoring. All commands are slash commands (type <code>/</code> to see them).</p>
 
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 1rem 0;">
-                    <strong>Step-by-step:</strong><br>
-                    1. Type <code>/setlogchannel</code> in any channel<br>
-                    2. A channel selector will appear<br>
-                    3. Click on the channel where you want logs sent<br>
-                    4. The bot will confirm the channel has been set
+                <h3>⚙️ Configuration Commands</h3>
+                
+                <h4>/setlogchannel</h4>
+                <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Set the log channel for this server</p>
+                <p>The primary command for setting up Event Sentinel. Select a channel where all event logs will be sent.</p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/setlogchannel</code> → Select channel from dropdown
+                </div>
+                <p><strong>Note:</strong> The bot must have "Send Messages" and "Embed Links" permissions in the selected channel.</p>
+
+                <h4>/setcolor</h4>
+                <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Set custom embed colors for event categories</p>
+                <p>Customize the color of embeds for different event types. Available categories:</p>
+                <ul>
+                    <li><code>moderation</code> - Moderation events (bans, kicks, timeouts, etc.)</li>
+                    <li><code>channel</code> - Channel and thread events</li>
+                    <li><code>voice</code> - Voice channel events</li>
+                    <li><code>message</code> - Message edit/delete events</li>
+                    <li><code>server</code> - Server settings and invite events</li>
+                    <li><code>role</code> - Role creation/update/delete events</li>
+                </ul>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/setcolor category:moderation color:E74C3C</code><br>
+                    <code>/setcolor category:voice color:#9B59B6</code><br>
+                    <code>/setcolor category:message color:0x2ECC71</code>
+                </div>
+                <p><strong>Color Format:</strong> You can use hex colors with or without prefixes: <code>E74C3C</code>, <code>#E74C3C</code>, or <code>0xE74C3C</code></p>
+            </section>
+
+            <section class="section">
+                <h3>🔧 Event Toggle Commands</h3>
+                <p>Enable or disable specific event types. All events are enabled by default. These commands allow you to fine-tune what gets logged.</p>
+                
+                <h4>/togglemoderation</h4>
+                <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Enable/disable moderation events</p>
+                <p>Available events: <code>member_ban</code>, <code>member_unban</code>, <code>member_join</code>, <code>member_remove</code>, <code>member_kick</code>, <code>nickname_change</code>, <code>timeout_set</code>, <code>timeout_removed</code>, <code>role_added</code>, <code>role_removed</code></p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/togglemoderation event_key:member_ban enabled:false</code>
                 </div>
 
-                <div class="info-box" style="background: #E8F5E9; border-left: 4px solid #4CAF50; padding: 1rem; margin: 1rem 0; border-radius: 4px;">
-                    <p><strong>✅ Important:</strong> Make sure the bot has permission to send messages in the channel you select. The bot needs "Send Messages" and "Embed Links" permissions in that channel.</p>
+                <h4>/togglevoice</h4>
+                <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Enable/disable voice channel events</p>
+                <p>Available events: <code>self_mute</code>, <code>self_unmute</code>, <code>server_mute</code>, <code>server_unmute</code></p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/togglevoice event_key:self_mute enabled:false</code>
+                </div>
+
+                <h4>/togglemessage</h4>
+                <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Enable/disable message events</p>
+                <p>Available events: <code>message_delete</code>, <code>message_edit</code></p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/togglemessage event_key:message_delete enabled:false</code>
+                </div>
+
+                <h4>/togglechannel</h4>
+                <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Enable/disable channel/thread events</p>
+                <p>Available events: <code>channel_create</code>, <code>channel_delete</code>, <code>channel_update</code>, <code>thread_create</code>, <code>thread_delete</code>, <code>thread_update</code></p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/togglechannel event_key:thread_create enabled:false</code>
+                </div>
+
+                <h4>/togglerole</h4>
+                <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Enable/disable role events</p>
+                <p>Available events: <code>role_create</code>, <code>role_delete</code>, <code>role_update</code></p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/togglerole event_key:role_update enabled:false</code>
+                </div>
+
+                <h4>/toggleserver</h4>
+                <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Enable/disable server events</p>
+                <p>Available events: <code>guild_update</code>, <code>invite_create</code>, <code>invite_delete</code></p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/toggleserver event_key:invite_create enabled:false</code>
+                </div>
+            </section>
+
+            <section class="section">
+                <h3>ℹ️ Information Commands</h3>
+                
+                <h4>/config</h4>
+                <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> View current server configuration</p>
+                <p>Shows your server's complete configuration including:</p>
+                <ul>
+                    <li>Log channel status and permissions</li>
+                    <li>Custom embed colors (if any)</li>
+                    <li>Event toggle overrides</li>
+                </ul>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/config</code>
+                </div>
+
+                <h4>/listeventtoggles</h4>
+                <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> View current event toggle overrides</p>
+                <p>Lists all events that have been enabled or disabled (shows only custom overrides, not defaults).</p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/listeventtoggles</code>
+                </div>
+
+                <h4>/botinfo</h4>
+                <p><strong>Permission:</strong> Anyone | <strong>Description:</strong> View bot status and information</p>
+                <p>Displays bot statistics including uptime, latency, server count, member count, and an invite link.</p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/botinfo</code>
+                </div>
+
+                <h4>/checkperms</h4>
+                <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Check bot permissions in this server</p>
+                <p>Verifies that the bot has all required permissions. Shows which permissions are present and which are missing, including log channel-specific permissions.</p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/checkperms</code>
+                </div>
+            </section>
+
+            <section class="section">
+                <h3>🛠️ Utility Commands</h3>
+                
+                <h4>/testlog</h4>
+                <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Send a test embed to the log channel</p>
+                <p>Use this command to verify that logging is working correctly. Sends a test message to your configured log channel.</p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/testlog</code>
+                </div>
+                <p><strong>Use Cases:</strong></p>
+                <ul>
+                    <li>After initial setup to verify everything works</li>
+                    <li>After changing the log channel</li>
+                    <li>When troubleshooting logging issues</li>
+                </ul>
+
+                <h4>/help</h4>
+                <p><strong>Permission:</strong> Anyone | <strong>Description:</strong> Show all available commands</p>
+                <p>Displays a help menu with all commands organized by category. This is the quickest way to see what commands are available.</p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/help</code>
                 </div>
             </section>
 
@@ -169,11 +220,17 @@
                 <h3>Can I have different log channels for different event types?</h3>
                 <p>Currently, Event Sentinel uses one log channel per server for all event types. All events will be sent to the channel you configure with <code>/setlogchannel</code>.</p>
 
+                <h3>How do I disable specific events?</h3>
+                <p>Use the toggle commands! For example, to disable message deletion logs, use <code>/togglemessage event_key:message_delete enabled:false</code>. To re-enable it, set <code>enabled:true</code>. Use <code>/listeventtoggles</code> to see all your current overrides.</p>
+
                 <h3>What if I remove the bot and add it back?</h3>
                 <p>You'll need to run <code>/setlogchannel</code> again to reconfigure the log channel. The bot doesn't remember previous configurations after being removed.</p>
 
-                <h3>Can I disable certain event types?</h3>
-                <p>Currently, all event types are logged when enabled. Advanced event filtering may be available in future updates. For now, all configured events will be logged to your selected channel.</p>
+                <h3>How do I reset all event toggles to defaults?</h3>
+                <p>Currently, you need to manually re-enable each disabled event using the toggle commands. Use <code>/listeventtoggles</code> to see what's been changed, then use the appropriate toggle command to reset each one.</p>
+
+                <h3>Can I customize embed colors?</h3>
+                <p>Yes! Use <code>/setcolor</code> to customize the color of embeds for each event category. This allows you to match your server's theme or make certain events stand out more.</p>
             </section>
 
             <section class="section">
