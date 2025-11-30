@@ -12,6 +12,7 @@
             <div class="nav-brand">
                 <h1>🛡️ Event Sentinel</h1>
             </div>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="getting-started.html">Getting Started</a></li>
@@ -78,9 +79,11 @@
             <div class="cta-section">
                 <h2>Have Questions?</h2>
                 <p>Review our Privacy Policy for information about data handling, or check out our setup guide to get started.</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=1231420875899928597" target="_blank" class="btn btn-primary">➕ Invite Event Sentinel</a>
-                <a href="https://discord.gg/ZPsp7nzREX" target="_blank" class="btn" style="background: #57F287; margin-left: 1rem;">💬 Discord Support</a>
-                <a href="privacy.html" class="btn" style="background: #6C757D; margin-left: 1rem;">View Privacy Policy</a>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                    <a href="https://discord.com/oauth2/authorize?client_id=1231420875899928597" target="_blank" class="btn btn-primary">➕ Invite Event Sentinel</a>
+                    <a href="https://discord.gg/ZPsp7nzREX" target="_blank" class="btn" style="background: #57F287;">💬 Discord Support</a>
+                    <a href="privacy.html" class="btn" style="background: #6C757D;">View Privacy Policy</a>
+                </div>
             </div>
         </div>
     </main>
@@ -89,6 +92,35 @@
         <p>&copy; 2025 Event Sentinel. Developed by HugsNdNugs.</p>
         <p style="margin-top: 0.5rem;"><a href="https://discord.gg/ZPsp7nzREX" target="_blank" style="color: #5865F2; text-decoration: none;">💬 Join our Discord Support Server</a></p>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on a link
+                const navLinks = navMenu.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                    });
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                        navMenu.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
 

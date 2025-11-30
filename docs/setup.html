@@ -12,6 +12,7 @@
             <div class="nav-brand">
                 <h1>🛡️ Event Sentinel</h1>
             </div>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="getting-started.html">Getting Started</a></li>
@@ -44,6 +45,7 @@
                             <li>Presence Intent</li>
                             <li>Server Members Intent</li>
                             <li>Message Content Intent</li>
+                            <li>Direct Messages Intent (required for modmail functionality)</li>
                         </ul>
                     </li>
                     <li>Copy your bot token (keep this secure!)</li>
@@ -155,9 +157,10 @@ cp -r config.example config</code>
                 <p>If you encounter issues, check:</p>
                 <ul>
                     <li>Bot has correct permissions in the server</li>
-                    <li>All required intents are enabled in the Developer Portal</li>
+                    <li>All required intents are enabled in the Developer Portal (including Direct Messages Intent for modmail)</li>
                     <li>Log channel is properly configured with <code>/setlogchannel</code></li>
                     <li>Bot has permission to send messages in the log channel</li>
+                    <li>If using modmail, ensure the modmail channel has proper permissions (Send Messages, Embed Links, Create Public Threads, Send Messages in Threads)</li>
                     <li>Bot token is correct in the <code>.env</code> file</li>
                 </ul>
             </section>
@@ -165,7 +168,9 @@ cp -r config.example config</code>
             <div class="cta-section">
                 <h2>Next Steps</h2>
                 <p>Once setup is complete, learn about advanced configuration options.</p>
-                <a href="configuration.html" class="btn btn-primary">View Configuration Guide</a>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                    <a href="configuration.html" class="btn btn-primary">View Configuration Guide</a>
+                </div>
             </div>
         </div>
     </main>
@@ -174,6 +179,35 @@ cp -r config.example config</code>
         <p>&copy; 2025 Event Sentinel. Developed by HugsNdNugs.</p>
         <p style="margin-top: 0.5rem;"><a href="https://discord.gg/ZPsp7nzREX" target="_blank" style="color: #5865F2; text-decoration: none;">💬 Join our Discord Support Server</a></p>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on a link
+                const navLinks = navMenu.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                    });
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                        navMenu.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
 

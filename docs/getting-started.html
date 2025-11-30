@@ -12,6 +12,7 @@
             <div class="nav-brand">
                 <h1>🛡️ Event Sentinel</h1>
             </div>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="getting-started.html" class="active">Getting Started</a></li>
@@ -37,7 +38,7 @@
                 <p>Before you can use Event Sentinel, it needs to be added to your Discord server. If the bot is already in your server, skip to Step 2.</p>
                 
                 <div style="text-align: center; margin: 2rem 0;">
-                    <a href="https://discord.com/oauth2/authorize?client_id=1231420875899928597" target="_blank" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem; text-decoration: none; display: inline-block;">➕ Invite Event Sentinel to Your Server</a>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1231420875899928597" target="_blank" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem; text-decoration: none; display: inline-block; max-width: 100%;">➕ Invite Event Sentinel to Your Server</a>
                 </div>
                 
                 <h3>Invite Instructions:</h3>
@@ -146,6 +147,63 @@
             </section>
 
             <section class="section">
+                <h2>Setting Up Modmail (Optional)</h2>
+                <p>Modmail allows users to contact your server staff by sending direct messages to the bot. Each conversation creates a thread in a dedicated channel for organized support.</p>
+                
+                <h3>Step 1: Create a Modmail Channel</h3>
+                <p>First, create a channel where modmail threads will be created:</p>
+                <ol>
+                    <li>Create a new text channel (e.g., <code>#modmail</code> or <code>#support-tickets</code>)</li>
+                    <li>Make sure the channel is visible to your staff/moderator roles</li>
+                    <li><strong>Important:</strong> Ensure Event Sentinel has these permissions in this channel:
+                        <ul>
+                            <li>Send Messages</li>
+                            <li>Embed Links</li>
+                            <li>Create Public Threads</li>
+                            <li>Send Messages in Threads</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>Step 2: Set the Modmail Channel</h3>
+                <p>Configure where modmail threads should be created:</p>
+                <ol>
+                    <li>Type <code>/setmodmailchannel</code> in any channel</li>
+                    <li>Select the channel you created for modmail</li>
+                    <li>The bot will confirm the modmail channel has been set</li>
+                </ol>
+
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 1rem 0;">
+                    <strong>Example:</strong><br>
+                    <code>/setmodmailchannel</code> → Select <code>#modmail</code> from the dropdown
+                </div>
+
+                <h3>Step 3: Enable Modmail</h3>
+                <p>By default, modmail may be disabled. Enable it with:</p>
+                <ol>
+                    <li>Type <code>/togglemail enabled:true</code></li>
+                    <li>The bot will confirm that modmail is now enabled</li>
+                </ol>
+
+                <div class="info-box" style="background: #E8F5E9; border-left: 4px solid #4CAF50; padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                    <p><strong>✅ Permission Required:</strong> You must be a server administrator to configure modmail. Users can start using modmail by simply DMing the bot once it's enabled!</p>
+                </div>
+
+                <h3>How It Works</h3>
+                <ol>
+                    <li>Users send a direct message to Event Sentinel</li>
+                    <li>A thread is automatically created in your modmail channel</li>
+                    <li>Staff members can respond in the thread</li>
+                    <li>Users receive responses in their DMs</li>
+                    <li>All conversations are organized in threads for easy tracking</li>
+                </ol>
+
+                <div class="info-box" style="background: #FFF3E0; border-left: 4px solid #FF9800; padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                    <p><strong>💡 Tip:</strong> You can disable modmail at any time using <code>/togglemail enabled:false</code> if you need to temporarily stop accepting modmail messages.</p>
+                </div>
+            </section>
+
+            <section class="section">
                 <h2>Troubleshooting</h2>
                 
                 <h3>Bot isn't logging events</h3>
@@ -178,6 +236,8 @@
                     <li><code>/testlog</code> - Send a test message to verify logging works</li>
                     <li><code>/config</code> - View your server's current configuration</li>
                     <li><code>/checkperms</code> - Check if the bot has all required permissions</li>
+                    <li><code>/setmodmailchannel</code> - Set the channel for modmail threads (optional)</li>
+                    <li><code>/togglemail</code> - Enable/disable modmail for your server (optional)</li>
                     <li><code>/help</code> - View all available commands</li>
                 </ul>
                 <p>For a complete list of all commands and advanced configuration options, see the <a href="configuration.html">Configuration Guide</a>.</p>
@@ -186,8 +246,10 @@
             <div class="cta-section">
                 <h2>What's Next?</h2>
                 <p>Now that you're set up, learn about all the events Event Sentinel can log and explore advanced configuration options!</p>
-                <a href="features.html" class="btn btn-primary">View All Features</a>
-                <a href="configuration.html" class="btn" style="background: #6C757D; margin-left: 1rem;">All Commands & Configuration</a>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                    <a href="features.html" class="btn btn-primary">View All Features</a>
+                    <a href="configuration.html" class="btn" style="background: #6C757D;">All Commands & Configuration</a>
+                </div>
             </div>
         </div>
     </main>
@@ -196,6 +258,35 @@
         <p>&copy; 2025 Event Sentinel. Developed by HugsNdNugs.</p>
         <p style="margin-top: 0.5rem;"><a href="https://discord.gg/ZPsp7nzREX" target="_blank" style="color: #5865F2; text-decoration: none;">💬 Join our Discord Support Server</a></p>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on a link
+                const navLinks = navMenu.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                    });
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                        navMenu.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
 

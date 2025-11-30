@@ -12,6 +12,7 @@
             <div class="nav-brand">
                 <h1>🛡️ Event Sentinel</h1>
             </div>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
             <ul class="nav-menu">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="getting-started.html">Getting Started</a></li>
@@ -27,9 +28,9 @@
         <div class="hero">
             <h1>Event Sentinel</h1>
             <p class="subtitle">A professional, production-ready Discord bot that logs all major server events using rich, detailed embeds.</p>
-            <div style="margin-top: 2rem;">
+            <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
                 <a href="https://discord.com/oauth2/authorize?client_id=1231420875899928597" target="_blank" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem; text-decoration: none; display: inline-block;">➕ Invite Event Sentinel</a>
-                <a href="https://discord.gg/ZPsp7nzREX" target="_blank" class="btn" style="font-size: 1.1rem; padding: 1rem 2rem; text-decoration: none; display: inline-block; margin-left: 1rem; background: #57F287;">💬 Discord Support</a>
+                <a href="https://discord.gg/ZPsp7nzREX" target="_blank" class="btn" style="font-size: 1.1rem; padding: 1rem 2rem; text-decoration: none; display: inline-block; background: #57F287;">💬 Discord Support</a>
             </div>
         </div>
 
@@ -40,6 +41,11 @@
             <div class="news-section">
                 <h2>📰 Latest News & Updates</h2>
                 <div class="news-container">
+                    <article class="news-item">
+                        <div class="news-date">Latest Update</div>
+                        <h3>📬 Modmail System Now Available!</h3>
+                        <p>Event Sentinel now includes a powerful modmail system! Allow users to contact your staff via DMs with automatic thread creation for organized support. Configure it easily with <code>/setmodmailchannel</code> and <code>/togglemail</code> commands.</p>
+                    </article>
                     <article class="news-item">
                         <div class="news-date">November 27, 2025</div>
                         <h3>Welcome to Event Sentinel Website!</h3>
@@ -85,14 +91,21 @@
                     <h3>Server Events</h3>
                     <p>Keep track of server settings updates and invite management.</p>
                 </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📬</div>
+                    <h3>Modmail System</h3>
+                    <p>Allow users to contact staff via DMs with automatic thread creation for organized support.</p>
+                </div>
             </div>
 
             <div class="cta-section">
                 <h2>Get Started</h2>
                 <p>Ready to start logging events in your Discord server?</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=1231420875899928597" target="_blank" class="btn btn-primary">➕ Invite Event Sentinel</a>
-                <a href="https://discord.gg/ZPsp7nzREX" target="_blank" class="btn" style="background: #57F287; margin-left: 1rem;">💬 Discord Support</a>
-                <a href="getting-started.html" class="btn" style="background: #6C757D; margin-left: 1rem;">Getting Started Guide</a>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                    <a href="https://discord.com/oauth2/authorize?client_id=1231420875899928597" target="_blank" class="btn btn-primary">➕ Invite Event Sentinel</a>
+                    <a href="https://discord.gg/ZPsp7nzREX" target="_blank" class="btn" style="background: #57F287;">💬 Discord Support</a>
+                    <a href="getting-started.html" class="btn" style="background: #6C757D;">Getting Started Guide</a>
+                </div>
             </div>
 
             <div class="info-section">
@@ -112,6 +125,35 @@
         <p>&copy; 2025 Event Sentinel. Developed by HugsNdNugs.</p>
         <p style="margin-top: 0.5rem;"><a href="https://discord.gg/ZPsp7nzREX" target="_blank" style="color: #5865F2; text-decoration: none;">💬 Join our Discord Support Server</a></p>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on a link
+                const navLinks = navMenu.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                    });
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                        navMenu.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
 

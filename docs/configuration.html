@@ -12,6 +12,7 @@
             <div class="nav-brand">
                 <h1>🛡️ Event Sentinel</h1>
             </div>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="getting-started.html">Getting Started</a></li>
@@ -78,6 +79,30 @@
                     <code>/setcolor category:message color:0x2ECC71</code>
                 </div>
                 <p><strong>Color Format:</strong> You can use hex colors with or without prefixes: <code>E74C3C</code>, <code>#E74C3C</code>, or <code>0xE74C3C</code></p>
+
+                <h4>/setmodmailchannel</h4>
+                <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Set the channel for modmail threads</p>
+                <p>Configure which channel modmail threads will be created in. When users DM the bot, a thread will be created in this channel for staff to respond.</p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/setmodmailchannel</code> → Select channel from dropdown
+                </div>
+                <p><strong>Required Permissions:</strong> The bot needs these permissions in the selected channel:</p>
+                <ul>
+                    <li>Send Messages</li>
+                    <li>Embed Links</li>
+                    <li>Create Public Threads</li>
+                    <li>Send Messages in Threads</li>
+                </ul>
+                <p><strong>Note:</strong> This command validates permissions before setting the channel. If permissions are missing, you'll receive an error message listing what's needed.</p>
+
+                <h4>/togglemail</h4>
+                <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Enable/disable modmail for this server</p>
+                <p>Control whether modmail is active for your server. When disabled, users won't be able to contact staff via DMs.</p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/togglemail enabled:true</code> - Enable modmail<br>
+                    <code>/togglemail enabled:false</code> - Disable modmail
+                </div>
+                <p><strong>Note:</strong> You must set a modmail channel with <code>/setmodmailchannel</code> before enabling modmail.</p>
             </section>
 
             <section class="section">
@@ -135,6 +160,7 @@
                 <p>Shows your server's complete configuration including:</p>
                 <ul>
                     <li>Log channel status and permissions</li>
+                    <li>Modmail channel and status (if configured)</li>
                     <li>Custom embed colors (if any)</li>
                     <li>Event toggle overrides</li>
                 </ul>
@@ -207,7 +233,8 @@
 │   ├── message.py       # Message events<br>
 │   ├── server.py        # Server and invite events<br>
 │   ├── roles.py         # Role events<br>
-│   └── channels.py      # Channel and thread events</code>
+│   ├── channels.py      # Channel and thread events<br>
+│   └── modmail.py       # Modmail system</code>
                 </div>
             </section>
 
@@ -219,6 +246,12 @@
 
                 <h3>Can I have different log channels for different event types?</h3>
                 <p>Currently, Event Sentinel uses one log channel per server for all event types. All events will be sent to the channel you configure with <code>/setlogchannel</code>.</p>
+
+                <h3>How do I set up modmail?</h3>
+                <p>First, create a channel for modmail threads, then run <code>/setmodmailchannel</code> to select that channel. Finally, enable modmail with <code>/togglemail enabled:true</code>. Once enabled, users can DM the bot to create support threads. See the <a href="getting-started.html">Getting Started</a> guide for detailed instructions.</p>
+
+                <h3>Can I disable modmail temporarily?</h3>
+                <p>Yes! Use <code>/togglemail enabled:false</code> to disable modmail. Users won't be able to contact staff via DMs while disabled. Re-enable it anytime with <code>/togglemail enabled:true</code>.</p>
 
                 <h3>How do I disable specific events?</h3>
                 <p>Use the toggle commands! For example, to disable message deletion logs, use <code>/togglemessage event_key:message_delete enabled:false</code>. To re-enable it, set <code>enabled:true</code>. Use <code>/listeventtoggles</code> to see all your current overrides.</p>
@@ -253,9 +286,11 @@
             <div class="cta-section">
                 <h2>Need Help?</h2>
                 <p>If you're a server administrator, check the Getting Started guide.</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=1231420875899928597" target="_blank" class="btn btn-primary">➕ Invite Event Sentinel</a>
-                <a href="https://discord.gg/ZPsp7nzREX" target="_blank" class="btn" style="background: #57F287; margin-left: 1rem;">💬 Discord Support</a>
-                <a href="getting-started.html" class="btn" style="background: #6C757D; margin-left: 1rem;">Getting Started Guide</a>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                    <a href="https://discord.com/oauth2/authorize?client_id=1231420875899928597" target="_blank" class="btn btn-primary">➕ Invite Event Sentinel</a>
+                    <a href="https://discord.gg/ZPsp7nzREX" target="_blank" class="btn" style="background: #57F287;">💬 Discord Support</a>
+                    <a href="getting-started.html" class="btn" style="background: #6C757D;">Getting Started Guide</a>
+                </div>
             </div>
         </div>
     </main>
@@ -264,6 +299,35 @@
         <p>&copy; 2025 Event Sentinel. Developed by HugsNdNugs.</p>
         <p style="margin-top: 0.5rem;"><a href="https://discord.gg/ZPsp7nzREX" target="_blank" style="color: #5865F2; text-decoration: none;">💬 Join our Discord Support Server</a></p>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on a link
+                const navLinks = navMenu.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                    });
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                        navMenu.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
 

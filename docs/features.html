@@ -12,6 +12,7 @@
             <div class="nav-brand">
                 <h1>🛡️ Event Sentinel</h1>
             </div>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="getting-started.html">Getting Started</a></li>
@@ -90,6 +91,20 @@
             </section>
 
             <section class="section">
+                <h2>📬 Modmail System</h2>
+                <p>Enable private communication between users and staff members:</p>
+                <ul>
+                    <li><strong>Direct Message Support</strong> - Users can DM the bot to contact server staff</li>
+                    <li><strong>Automatic Thread Creation</strong> - Each modmail conversation creates a dedicated thread in your configured modmail channel</li>
+                    <li><strong>Organized Conversations</strong> - All modmail threads are organized in one channel for easy management</li>
+                    <li><strong>Two-Way Communication</strong> - Staff can respond in threads, and users receive messages in their DMs</li>
+                    <li><strong>Enable/Disable Control</strong> - Administrators can enable or disable modmail for their server</li>
+                    <li><strong>Custom Channel Setup</strong> - Configure which channel modmail threads are created in</li>
+                </ul>
+                <p><strong>Use Cases:</strong> Support tickets, user reports, private inquiries, staff communication, and more!</p>
+            </section>
+
+            <section class="section">
                 <h2>Embed Design</h2>
                 <p>Each event type features:</p>
                 <ul>
@@ -104,9 +119,11 @@
             <div class="cta-section">
                 <h2>Ready to Get Started?</h2>
                 <p>Set up Event Sentinel in your Discord server today!</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=1231420875899928597" target="_blank" class="btn btn-primary">➕ Invite Event Sentinel</a>
-                <a href="https://discord.gg/ZPsp7nzREX" target="_blank" class="btn" style="background: #57F287; margin-left: 1rem;">💬 Discord Support</a>
-                <a href="getting-started.html" class="btn" style="background: #6C757D; margin-left: 1rem;">Getting Started Guide</a>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                    <a href="https://discord.com/oauth2/authorize?client_id=1231420875899928597" target="_blank" class="btn btn-primary">➕ Invite Event Sentinel</a>
+                    <a href="https://discord.gg/ZPsp7nzREX" target="_blank" class="btn" style="background: #57F287;">💬 Discord Support</a>
+                    <a href="getting-started.html" class="btn" style="background: #6C757D;">Getting Started Guide</a>
+                </div>
             </div>
         </div>
     </main>
@@ -115,6 +132,35 @@
         <p>&copy; 2025 Event Sentinel. Developed by HugsNdNugs.</p>
         <p style="margin-top: 0.5rem;"><a href="https://discord.gg/ZPsp7nzREX" target="_blank" style="color: #5865F2; text-decoration: none;">💬 Join our Discord Support Server</a></p>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on a link
+                const navLinks = navMenu.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                    });
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                        navMenu.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
 
