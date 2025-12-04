@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modmail Moderator Guide - Event Sentinel Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+        }
+        table th, table td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+        table th {
+            background: var(--card-bg);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        table tr:nth-child(even) {
+            background: var(--card-bg);
+        }
+        code {
+            background: #F5F5F5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        .command-example {
+            background: #2C2F33;
+            color: #F8F9FA;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+        }
+        hr {
+            border: none;
+            border-top: 2px solid var(--border-color);
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🛡️ Event Sentinel</h1>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="getting-started.html">Getting Started</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="configuration.html">Configuration</a></li>
+                <li><a href="modmail-guide.html" class="active">Modmail Guide</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="terms.html">Terms</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="content">
+            <h1>Modmail Moderator Guide</h1>
+
+            <section class="section">
+                <h2>Overview</h2>
+                <p>The Modmail system allows users to contact server staff privately by sending direct messages (DMs) to the bot. Each conversation is organized in a dedicated thread within your server's modmail channel, creating a private, trackable communication channel between users and staff.</p>
+            </section>
+
+            <hr>
+
+            <section class="section">
+                <h2>How Modmail Works</h2>
+                
+                <h3>For Users</h3>
+                <ol>
+                    <li>Users DM the bot to start a conversation</li>
+                    <li>If modmail is enabled in multiple servers, users select which server they want to contact</li>
+                    <li>A new thread is automatically created in your modmail channel</li>
+                    <li>Users can send messages, images, and files through DM</li>
+                    <li>All messages are forwarded to the modmail thread where staff can see and respond</li>
+                </ol>
+
+                <h3>For Moderators</h3>
+                <ol>
+                    <li>New modmail threads appear in your configured modmail channel</li>
+                    <li>Each thread represents one user conversation</li>
+                    <li>Staff can respond directly in the thread</li>
+                    <li>Responses are automatically forwarded to the user's DMs</li>
+                    <li>Threads can be closed when the conversation is resolved</li>
+                </ol>
+            </section>
+
+            <hr>
+
+            <section class="section">
+                <h2>Key Features</h2>
+
+                <h3>📬 Automatic Thread Creation</h3>
+                <ul>
+                    <li>When a user first contacts modmail, a new thread is automatically created</li>
+                    <li>Thread names follow the format: <code>username-userid</code> (e.g., <code>JohnDoe-123456789</code>)</li>
+                    <li>Threads are set to auto-archive after 7 days of inactivity</li>
+                    <li>Each thread includes an initial embed with user information</li>
+                </ul>
+
+                <h3>🔄 Bidirectional Communication</h3>
+                <ul>
+                    <li><strong>User → Staff</strong>: Messages sent via DM are forwarded to the modmail thread</li>
+                    <li><strong>Staff → User</strong>: Messages sent in the thread are forwarded to the user's DMs</li>
+                    <li>All messages include timestamps and are formatted in easy-to-read embeds</li>
+                </ul>
+
+                <h3>📎 File & Image Support</h3>
+                <ul>
+                    <li>Users can send images, files, and attachments through DM</li>
+                    <li>Images are automatically embedded in the modmail thread</li>
+                    <li>File attachments are linked for easy access</li>
+                    <li>Staff can also send images and files through the thread</li>
+                </ul>
+
+                <h3>🎯 Multi-Server Support</h3>
+                <ul>
+                    <li>The bot supports modmail across multiple servers</li>
+                    <li>Users can select which server to contact if they're in multiple servers with modmail enabled</li>
+                    <li>Support server (if configured) is always shown first with a special indicator 🛟</li>
+                </ul>
+            </section>
+
+            <hr>
+
+            <section class="section">
+                <h2>Moderator Workflow</h2>
+
+                <h3>1. Receiving a New Modmail</h3>
+                <p>When a user first contacts modmail, you'll see:</p>
+                <ol>
+                    <li><strong>Initial Thread Message</strong>: An embed showing:
+                        <ul>
+                            <li>User's display name and mention</li>
+                            <li>User ID (for reference)</li>
+                            <li>Account creation date</li>
+                            <li>User's avatar</li>
+                        </ul>
+                    </li>
+                    <li><strong>User's First Message</strong>: The user's message will appear as an embed with:
+                        <ul>
+                            <li>Message content</li>
+                            <li>Attachments (if any)</li>
+                            <li>Timestamp</li>
+                            <li>User information</li>
+                        </ul>
+                    </li>
+                    <li><strong>User Notification</strong>: The user receives a welcome message explaining:
+                        <ul>
+                            <li>Their message has been forwarded to staff</li>
+                            <li>How to continue the conversation</li>
+                            <li>That messages are anonymous to other members</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>2. Responding to Users</h3>
+                <p>To reply to a user:</p>
+                <ol>
+                    <li>Navigate to the modmail thread in your modmail channel</li>
+                    <li>Simply type your message and send it</li>
+                    <li>Your message will automatically be forwarded to the user's DMs</li>
+                    <li>The bot will add a ✅ reaction to confirm the message was sent</li>
+                </ol>
+
+                <p><strong>Tips for Responding:</strong></p>
+                <ul>
+                    <li>Be clear and professional</li>
+                    <li>Use embeds naturally (the bot handles formatting)</li>
+                    <li>You can include images and files - they'll be forwarded to the user</li>
+                    <li>Multiple staff members can participate in the same thread</li>
+                </ul>
+
+                <h3>3. Handling Follow-up Messages</h3>
+                <ul>
+                    <li>Subsequent messages from the user will appear in the same thread</li>
+                    <li>You don't need to do anything special - just respond as needed</li>
+                    <li>The thread stays active until manually closed or archived</li>
+                </ul>
+
+                <h3>4. Closing a Modmail Thread</h3>
+                <p>When a conversation is resolved, close the thread:</p>
+                
+                <p><strong>Using the Command:</strong></p>
+                <div class="command-example">/closemodmail [reason]</div>
+
+                <p><strong>What happens when you close:</strong></p>
+                <ul>
+                    <li>The thread is archived and locked</li>
+                    <li>The user receives a notification that the thread has been closed</li>
+                    <li>If you provided a reason, it's included in the notification</li>
+                    <li>The thread mapping is cleaned up from the system</li>
+                    <li>The user can start a new thread by sending another DM</li>
+                </ul>
+
+                <p><strong>Permissions Required:</strong></p>
+                <ul>
+                    <li>You need <code>Manage Threads</code> permission to close modmail threads</li>
+                </ul>
+
+                <p><strong>Example:</strong></p>
+                <div class="command-example">/closemodmail reason:Issue resolved, user satisfied with the explanation</div>
+            </section>
+
+            <hr>
+
+            <section class="section">
+                <h2>Thread Information</h2>
+                <p>Each modmail thread contains:</p>
+
+                <h3>Initial Thread Embed</h3>
+                <ul>
+                    <li><strong>Title</strong>: "📬 New Modmail Thread"</li>
+                    <li><strong>User Information</strong>: Display name, mention, and User ID</li>
+                    <li><strong>Account Created</strong>: Relative time (e.g., "2 years ago")</li>
+                    <li><strong>Thumbnail</strong>: User's avatar</li>
+                </ul>
+
+                <h3>Message Embeds</h3>
+                
+                <p><strong>From User (appears in thread):</strong></p>
+                <ul>
+                    <li><strong>Title</strong>: "📥 Message from User"</li>
+                    <li><strong>Author</strong>: User's name and ID</li>
+                    <li><strong>Content</strong>: The actual message text</li>
+                    <li><strong>Attachments</strong>: Links and embedded images</li>
+                    <li><strong>Timestamp</strong>: When the message was sent</li>
+                </ul>
+
+                <p><strong>From Staff (sent to user's DM):</strong></p>
+                <ul>
+                    <li><strong>Title</strong>: "📨 Message from Staff"</li>
+                    <li><strong>Author</strong>: "Staff from [Server Name]"</li>
+                    <li><strong>Content</strong>: Your message text</li>
+                    <li><strong>Attachments</strong>: Links and embedded images</li>
+                    <li><strong>Footer</strong>: "Reply to this DM to continue the conversation"</li>
+                    <li><strong>Timestamp</strong>: When the message was sent</li>
+                </ul>
+            </section>
+
+            <hr>
+
+            <section class="section">
+                <h2>Permissions Required</h2>
+
+                <h3>For Moderators/Staff</h3>
+                <p>To use modmail effectively, you need:</p>
+                <ul>
+                    <li><strong>View Channel</strong>: Access to the modmail channel</li>
+                    <li><strong>Send Messages</strong>: To respond to users</li>
+                    <li><strong>Embed Links</strong>: For message formatting</li>
+                    <li><strong>Attach Files</strong>: To send images/files</li>
+                    <li><strong>Read Message History</strong>: To see conversation history</li>
+                    <li><strong>Manage Threads</strong>: To close modmail threads (optional but recommended)</li>
+                    <li><strong>Send Messages in Threads</strong>: To respond in threads</li>
+                </ul>
+
+                <h3>For the Bot</h3>
+                <p>The bot requires:</p>
+                <ul>
+                    <li><strong>View Channels</strong>: Access to modmail channel</li>
+                    <li><strong>Send Messages</strong>: In modmail channel and threads</li>
+                    <li><strong>Embed Links</strong>: For formatted messages</li>
+                    <li><strong>Attach Files</strong>: For forwarding attachments</li>
+                    <li><strong>Manage Threads</strong>: To create and archive threads</li>
+                    <li><strong>Read Message History</strong>: To track conversations</li>
+                    <li><strong>DM Messages Intent</strong>: Enabled in Discord Developer Portal (already configured)</li>
+                </ul>
+            </section>
+
+            <hr>
+
+            <section class="section">
+                <h2>Best Practices</h2>
+
+                <h3>Communication</h3>
+                <p><strong>✅ Do:</strong></p>
+                <ul>
+                    <li>Respond promptly to modmail inquiries</li>
+                    <li>Be professional and courteous</li>
+                    <li>Use clear, concise language</li>
+                    <li>Provide helpful information</li>
+                    <li>Close threads when resolved</li>
+                </ul>
+
+                <p><strong>❌ Don't:</strong></p>
+                <ul>
+                    <li>Share personal information in threads (users can see who responds)</li>
+                    <li>Leave threads open indefinitely</li>
+                    <li>Use modmail for casual conversation</li>
+                    <li>Delete modmail threads (use <code>/closemodmail</code> instead)</li>
+                </ul>
+
+                <h3>Thread Management</h3>
+                <ul>
+                    <li><strong>Close threads promptly</strong> when issues are resolved</li>
+                    <li><strong>Use the reason field</strong> when closing for documentation</li>
+                    <li><strong>Coordinate with team</strong> if multiple staff are responding</li>
+                    <li><strong>Don't manually delete threads</strong> - use the close command to properly notify users</li>
+                </ul>
+
+                <h3>Privacy</h3>
+                <ul>
+                    <li>Remember that multiple staff members can see modmail threads</li>
+                    <li>Users cannot see who specifically responded, only that "Staff from [Server]" replied</li>
+                    <li>All conversations are logged in the thread for review</li>
+                    <li>Keep sensitive information secure</li>
+                </ul>
+            </section>
+
+            <hr>
+
+            <section class="section">
+                <h2>Troubleshooting</h2>
+
+                <h3>User Can't Send Messages</h3>
+                <p><strong>Issue</strong>: User reports they can't contact modmail</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Verify modmail is enabled for your server (admin configuration)</li>
+                    <li>Check that the bot is online and operational</li>
+                    <li>Ensure the user has DMs enabled (users with DMs disabled cannot use modmail)</li>
+                    <li>Verify the modmail channel still exists and is accessible</li>
+                </ul>
+
+                <h3>Messages Not Forwarding</h3>
+                <p><strong>Issue</strong>: Staff messages aren't reaching users</p>
+                <p><strong>Possible Causes:</strong></p>
+                <ul>
+                    <li>User has DMs disabled or blocked the bot</li>
+                    <li>Bot doesn't have permission to send DMs</li>
+                    <li>User has left the server</li>
+                </ul>
+
+                <p><strong>What You'll See:</strong></p>
+                <ul>
+                    <li>Error message in thread: "❌ Cannot send DM to user. They may have DMs disabled."</li>
+                    <li>✅ reaction won't appear on your message</li>
+                </ul>
+
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Inform user they need to enable DMs from server members</li>
+                    <li>Ask user to check their privacy settings</li>
+                    <li>Consider alternative contact methods if urgent</li>
+                </ul>
+
+                <h3>Thread Already Closed</h3>
+                <p><strong>Issue</strong>: Trying to close an already-archived thread</p>
+                <p><strong>What Happens:</strong></p>
+                <ul>
+                    <li>The command will acknowledge the thread is already closed</li>
+                    <li>Configuration is still cleaned up</li>
+                    <li>User won't receive duplicate notifications</li>
+                </ul>
+
+                <h3>Can't Find a User's Thread</h3>
+                <p><strong>Issue</strong>: Looking for a specific user's modmail thread</p>
+                <p><strong>Solutions:</strong></p>
+                <ul>
+                    <li>Search for the user's name or ID in the modmail channel</li>
+                    <li>Thread names include the user ID for easy searching</li>
+                    <li>Check if the thread was already closed/archived</li>
+                    <li>Verify you're looking in the correct modmail channel</li>
+                </ul>
+
+                <h3>Multiple Threads for Same User</h3>
+                <p><strong>Issue</strong>: User has multiple active threads</p>
+                <p><strong>Why This Happens:</strong></p>
+                <ul>
+                    <li>Rarely occurs, but can happen if:
+                        <ul>
+                            <li>Thread was deleted manually</li>
+                            <li>Configuration issue</li>
+                            <li>User was in multiple servers</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p><strong>Solution:</strong></p>
+                <ul>
+                    <li>Close all threads for the user</li>
+                    <li>User's next DM will create a fresh thread</li>
+                    <li>Report persistent issues to bot administrator</li>
+                </ul>
+            </section>
+
+            <hr>
+
+            <section class="section">
+                <h2>Command Reference</h2>
+
+                <h3>/closemodmail</h3>
+                <p>Close the current modmail thread.</p>
+                
+                <p><strong>Usage:</strong></p>
+                <div class="command-example">/closemodmail [reason]</div>
+
+                <p><strong>Parameters:</strong></p>
+                <ul>
+                    <li><code>reason</code> (optional): Reason for closing the thread. This will be included in the notification sent to the user.</li>
+                </ul>
+
+                <p><strong>Permissions:</strong></p>
+                <ul>
+                    <li>Requires <code>Manage Threads</code> permission</li>
+                    <li>Can only be used in modmail threads</li>
+                </ul>
+
+                <p><strong>Example:</strong></p>
+                <div class="command-example">/closemodmail reason:Your question has been answered. If you need further assistance, feel free to open a new modmail.</div>
+
+                <p><strong>What It Does:</strong></p>
+                <ol>
+                    <li>Archives and locks the thread</li>
+                    <li>Sends closure notification to user (if DMs enabled)</li>
+                    <li>Removes thread from active tracking</li>
+                    <li>Allows user to start new thread if needed</li>
+                </ol>
+            </section>
+
+            <hr>
+
+            <section class="section">
+                <h2>Configuration (Administrator Only)</h2>
+                <p>Modmail must be configured by a server administrator. Configuration includes:</p>
+                <ul>
+                    <li><strong>Modmail Channel</strong>: Where threads are created</li>
+                    <li><strong>Enable/Disable</strong>: Toggle modmail for the server</li>
+                    <li><strong>Category</strong> (optional): Create threads in specific category</li>
+                </ul>
+                <p>Configuration is stored in <code>config.json</code> under the <code>modmail</code> section for each guild.</p>
+                <p><strong>Note</strong>: Contact your server administrator if modmail isn't working or needs configuration changes.</p>
+            </section>
+
+            <hr>
+
+            <section class="section">
+                <h2>Support & Questions</h2>
+                <p>If you encounter issues or have questions about using modmail:</p>
+                <ol>
+                    <li>Check this guide first</li>
+                    <li>Verify your permissions</li>
+                    <li>Contact your server administrator</li>
+                    <li>Check if the bot is online and functioning</li>
+                </ol>
+            </section>
+
+            <hr>
+
+            <section class="section">
+                <h2>Quick Reference</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>How To</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Respond to user</strong></td>
+                            <td>Type in the modmail thread and send</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Close thread</strong></td>
+                            <td>Use <code>/closemodmail [reason]</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>View user info</strong></td>
+                            <td>Check the initial thread embed</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Send images/files</strong></td>
+                            <td>Attach to your message in the thread</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Check if message sent</strong></td>
+                            <td>Look for ✅ reaction</td>
+                        </tr>
+                        <tr>
+                            <td><strong>User has DMs disabled</strong></td>
+                            <td>Error message appears in thread</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <hr>
+
+            <section class="section">
+                <h2>Examples</h2>
+
+                <h3>Example 1: Handling a User Question</h3>
+                <p><strong>User's DM:</strong></p>
+                <div class="code-block">How do I get the member role?</div>
+                
+                <p><strong>In Modmail Thread:</strong> You'll see an embed with the user's message.</p>
+                
+                <p><strong>Your Response:</strong> Simply type in the thread:</p>
+                <div class="code-block">Hi! You can get the member role by reacting to the message in #rules. Let me know if you need help finding it!</div>
+                <p>This automatically forwards to the user's DMs.</p>
+
+                <h3>Example 2: Closing a Thread</h3>
+                <p><strong>When conversation is resolved:</strong></p>
+                <div class="command-example">/closemodmail reason:Question answered. User knows how to get the member role now.</div>
+                
+                <p><strong>What user sees:</strong> A DM notification saying their modmail thread has been closed with your reason included.</p>
+
+                <h3>Example 3: Multi-Message Conversation</h3>
+                <p><strong>User:</strong> "I lost access to a channel"</p>
+                <p><strong>Staff Member 1:</strong> "Let me check your roles..."</p>
+                <p><strong>Staff Member 2:</strong> "I've restored your access. Try now!"</p>
+                <p><strong>User:</strong> "It works! Thank you!"</p>
+                <p><strong>Staff Member 1:</strong> "Great! Let me close this thread."</p>
+                <div class="command-example">/closemodmail reason:Access restored successfully</div>
+            </section>
+
+            <div class="cta-section">
+                <h2>Ready to Get Started?</h2>
+                <p>Set up modmail in your Discord server today!</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                    <a href="getting-started.html" class="btn btn-primary">Setup Modmail</a>
+                    <a href="configuration.html" class="btn" style="background: #6C757D;">All Commands</a>
+                    <a href="https://discord.gg/ZPsp7nzREX" target="_blank" class="btn" style="background: #57F287;">💬 Discord Support</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Event Sentinel. Developed by HugsNdNugs.</p>
+        <p style="margin-top: 0.5rem;"><a href="https://discord.gg/ZPsp7nzREX" target="_blank" style="color: #5865F2; text-decoration: none;">💬 Join our Discord Support Server</a></p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on a link
+                const navLinks = navMenu.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        navMenu.classList.remove('active');
+                    });
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                        navMenu.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

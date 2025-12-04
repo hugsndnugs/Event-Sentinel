@@ -18,6 +18,7 @@
                 <li><a href="getting-started.html">Getting Started</a></li>
                 <li><a href="features.html">Features</a></li>
                 <li><a href="configuration.html">Configuration</a></li>
+                <li><a href="modmail-guide.html">Modmail Guide</a></li>
                 <li><a href="privacy.html">Privacy</a></li>
                 <li><a href="terms.html">Terms</a></li>
             </ul>
@@ -79,7 +80,11 @@ cp -r config.example config</code>
                 <h3>Install Dependencies</h3>
                 <p>Install required Python packages:</p>
                 <div class="code-block">
-                    <code>pip install discord.py python-dotenv PyNaCl</code>
+                    <code>pip install discord.py python-dotenv PyNaCl Flask aiohttp</code>
+                </div>
+                <p><strong>Or use the requirements file:</strong></p>
+                <div class="code-block">
+                    <code>pip install -r requirements.txt</code>
                 </div>
             </section>
 
@@ -137,6 +142,8 @@ cp -r config.example config</code>
                     <li>discord.py 2.4+</li>
                     <li>python-dotenv</li>
                     <li>PyNaCl</li>
+                    <li>Flask 3.0+ (for dashboard)</li>
+                    <li>aiohttp 3.9+ (for API requests)</li>
                 </ul>
             </section>
 

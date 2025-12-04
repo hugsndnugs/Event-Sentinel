@@ -18,6 +18,7 @@
                 <li><a href="getting-started.html">Getting Started</a></li>
                 <li><a href="features.html">Features</a></li>
                 <li><a href="configuration.html" class="active">Configuration</a></li>
+                <li><a href="modmail-guide.html">Modmail Guide</a></li>
                 <li><a href="privacy.html">Privacy</a></li>
                 <li><a href="terms.html">Terms</a></li>
             </ul>
@@ -103,6 +104,15 @@
                     <code>/togglemail enabled:false</code> - Disable modmail
                 </div>
                 <p><strong>Note:</strong> You must set a modmail channel with <code>/setmodmailchannel</code> before enabling modmail.</p>
+
+                <h4>/closemodmail</h4>
+                <p><strong>Permission:</strong> Manage Threads | <strong>Description:</strong> Close the current modmail thread</p>
+                <p>Close and archive a modmail thread. This command can only be used within a modmail thread and requires the "Manage Threads" permission.</p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/closemodmail</code> - Close the current thread<br>
+                    <code>/closemodmail reason:Issue resolved</code> - Close with a reason
+                </div>
+                <p><strong>Note:</strong> When a thread is closed, the user will be notified via DM and the thread will be archived and locked.</p>
             </section>
 
             <section class="section">
@@ -215,6 +225,19 @@
             </section>
 
             <section class="section">
+                <h3>📬 Modmail Commands</h3>
+                
+                <h4>/closemodmail</h4>
+                <p><strong>Permission:</strong> Manage Threads | <strong>Description:</strong> Close the current modmail thread</p>
+                <p>Close and archive a modmail thread. This command can only be used within a modmail thread and requires the "Manage Threads" permission.</p>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/closemodmail</code> - Close the current thread<br>
+                    <code>/closemodmail reason:Issue resolved</code> - Close with a reason
+                </div>
+                <p><strong>Note:</strong> When a thread is closed, the user will be notified via DM and the thread will be archived and locked.</p>
+            </section>
+
+            <section class="section">
                 <h2>Advanced Configuration (For Developers)</h2>
                 <p>The following configuration options are for developers hosting their own bot instance. End users don't need to modify these files.</p>
             </section>
@@ -226,6 +249,8 @@
                     <code>event-sentinel/<br>
 ├── main.py              # Bot initialization and startup<br>
 ├── utils.py             # Shared utility functions<br>
+├── dashboard.py         # Web dashboard (optional)<br>
+├── health_check.py      # Health check server<br>
 ├── config.json          # Bot configuration<br>
 ├── cogs/<br>
 │   ├── moderation.py    # Member and moderation events<br>
@@ -234,6 +259,7 @@
 │   ├── server.py        # Server and invite events<br>
 │   ├── roles.py         # Role events<br>
 │   ├── channels.py      # Channel and thread events<br>
+│   ├── utility.py        # Utility commands (help, config, etc.)<br>
 │   └── modmail.py       # Modmail system</code>
                 </div>
             </section>
