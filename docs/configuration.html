@@ -83,7 +83,7 @@
 
                 <h4>/setmodmailchannel</h4>
                 <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Set the channel for modmail threads</p>
-                <p>Configure which channel modmail threads will be created in. When users DM the bot, a thread will be created in this channel for staff to respond.</p>
+                <p>Configure which channel modmail threads will be created in. When users DM the bot, a thread will be created in this channel for staff to respond. Users in multiple servers can select which server to contact via a dropdown menu, with the support server always shown first with a special indicator (🛟).</p>
                 <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
                     <code>/setmodmailchannel</code> → Select channel from dropdown
                 </div>
@@ -198,6 +198,21 @@
                 <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
                     <code>/checkperms</code>
                 </div>
+
+                <h4>/ratelimitstatus</h4>
+                <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> View rate limiting statistics and queue information</p>
+                <p>Displays comprehensive rate limiting statistics including:</p>
+                <ul>
+                    <li>Rate limit hits (429 errors encountered)</li>
+                    <li>Messages queued and sent</li>
+                    <li>Queue overflows</li>
+                    <li>Per-channel queue status</li>
+                    <li>Global rate limit statistics</li>
+                </ul>
+                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                    <code>/ratelimitstatus</code>
+                </div>
+                <p><strong>Use Cases:</strong> Monitor bot performance, troubleshoot message delivery issues, and verify rate limiting is working correctly.</p>
             </section>
 
             <section class="section">
@@ -248,9 +263,10 @@
                 <div class="code-block">
                     <code>event-sentinel/<br>
 ├── main.py              # Bot initialization and startup<br>
+├── __main__.py          # Module entry point (run as: python -m .)<br>
 ├── utils.py             # Shared utility functions<br>
+├── rate_limiter.py      # Rate limiting system<br>
 ├── dashboard.py         # Web dashboard (optional)<br>
-├── health_check.py      # Health check server<br>
 ├── config.json          # Bot configuration<br>
 ├── cogs/<br>
 │   ├── moderation.py    # Member and moderation events<br>
@@ -274,7 +290,7 @@
                 <p>Currently, Event Sentinel uses one log channel per server for all event types. All events will be sent to the channel you configure with <code>/setlogchannel</code>.</p>
 
                 <h3>How do I set up modmail?</h3>
-                <p>First, create a channel for modmail threads, then run <code>/setmodmailchannel</code> to select that channel. Finally, enable modmail with <code>/togglemail enabled:true</code>. Once enabled, users can DM the bot to create support threads. See the <a href="getting-started.html">Getting Started</a> guide for detailed instructions.</p>
+                <p>First, create a channel for modmail threads, then run <code>/setmodmailchannel</code> to select that channel. Finally, enable modmail with <code>/togglemail enabled:true</code>. Once enabled, users can DM the bot to create support threads. Users in multiple servers will see a dropdown menu to select which server to contact, with the support server always shown first. See the <a href="getting-started.html">Getting Started</a> guide for detailed instructions.</p>
 
                 <h3>Can I disable modmail temporarily?</h3>
                 <p>Yes! Use <code>/togglemail enabled:false</code> to disable modmail. Users won't be able to contact staff via DMs while disabled. Re-enable it anytime with <code>/togglemail enabled:true</code>.</p>
@@ -283,7 +299,7 @@
                 <p>Use the toggle commands! For example, to disable message deletion logs, use <code>/togglemessage event_key:message_delete enabled:false</code>. To re-enable it, set <code>enabled:true</code>. Use <code>/listeventtoggles</code> to see all your current overrides.</p>
 
                 <h3>What if I remove the bot and add it back?</h3>
-                <p>You'll need to run <code>/setlogchannel</code> again to reconfigure the log channel. The bot doesn't remember previous configurations after being removed.</p>
+                <p>You'll need to run <code>/setlogchannel</code> again to reconfigure the log channel. When the bot is removed from a server, all configuration data (log channels, event toggles, embed colors, modmail config) is automatically cleaned up. This ensures no stale data remains.</p>
 
                 <h3>How do I reset all event toggles to defaults?</h3>
                 <p>Currently, you need to manually re-enable each disabled event using the toggle commands. Use <code>/listeventtoggles</code> to see what's been changed, then use the appropriate toggle command to reset each one.</p>
@@ -299,13 +315,22 @@
                     <li>Missing permissions - The bot will attempt to log events but may show limited information</li>
                     <li>Missing audit log entries - Some events may not include moderator information</li>
                     <li>Unavailable log channels - The bot will continue running but won't be able to send logs</li>
-                    <li>Rate limiting - The bot automatically handles Discord's rate limits</li>
+                    <li>Rate limiting - The bot automatically handles Discord's rate limits using an advanced rate limiting system</li>
                 </ul>
+                <p><strong>Rate Limiting System:</strong> Event Sentinel includes a comprehensive rate limiting system that automatically prevents Discord API rate limit errors. The system uses:</p>
+                <ul>
+                    <li>Per-channel queuing (5 messages per 5 seconds) to prevent channel-specific rate limits</li>
+                    <li>Global rate limiting (50 requests per second) to protect against API overload</li>
+                    <li>Automatic retry with exponential backoff for 429 errors</li>
+                    <li>Queue overflow protection (maximum 100 items per queue)</li>
+                </ul>
+                <p>All rate limiting happens automatically in the background - no configuration needed. Use <code>/ratelimitstatus</code> to monitor rate limiting statistics.</p>
                 <p>If you notice events aren't being logged, check that:</p>
                 <ul>
                     <li>The bot has permission to send messages in the log channel</li>
                     <li>The log channel is properly configured with <code>/setlogchannel</code></li>
                     <li>The bot has "View Audit Log" permission in your server</li>
+                    <li>Check <code>/ratelimitstatus</code> if messages seem delayed (may be queued due to rate limits)</li>
                 </ul>
             </section>
 

@@ -96,13 +96,45 @@
                 <p>Enable private communication between users and staff members:</p>
                 <ul>
                     <li><strong>Direct Message Support</strong> - Users can DM the bot to contact server staff</li>
+                    <li><strong>Multi-Guild Support</strong> - Users in multiple servers can select which server to contact via dropdown menu</li>
+                    <li><strong>Support Server Priority</strong> - Support server is always shown first with special indicator (🛟) for easy access</li>
                     <li><strong>Automatic Thread Creation</strong> - Each modmail conversation creates a dedicated thread in your configured modmail channel</li>
                     <li><strong>Organized Conversations</strong> - All modmail threads are organized in one channel for easy management</li>
                     <li><strong>Two-Way Communication</strong> - Staff can respond in threads, and users receive messages in their DMs</li>
                     <li><strong>Enable/Disable Control</strong> - Administrators can enable or disable modmail for their server</li>
                     <li><strong>Custom Channel Setup</strong> - Configure which channel modmail threads are created in</li>
+                    <li><strong>Rate Limiting Integration</strong> - All modmail operations automatically use the rate limiting system for reliable delivery</li>
                 </ul>
                 <p><strong>Use Cases:</strong> Support tickets, user reports, private inquiries, staff communication, and more!</p>
+            </section>
+
+            <section class="section">
+                <h2>⚡ Rate Limiting System</h2>
+                <p>Automatic rate limiting prevents Discord API errors and ensures reliable message delivery:</p>
+                <ul>
+                    <li><strong>Per-Channel Queuing</strong> - Each channel has its own queue (5 messages per 5 seconds) to prevent rate limits</li>
+                    <li><strong>Token Bucket Algorithm</strong> - Implements smooth rate limiting with automatic token refill</li>
+                    <li><strong>Global Rate Limiting</strong> - 50 requests per second global limit to protect against API overload</li>
+                    <li><strong>Audit Log Protection</strong> - Conservative 2 requests per second for audit log operations</li>
+                    <li><strong>Automatic Retry</strong> - Handles 429 errors with automatic retry after delay</li>
+                    <li><strong>Queue Management</strong> - Maximum 100 items per queue with overflow protection</li>
+                    <li><strong>Statistics Tracking</strong> - Monitor rate limit hits, messages queued/sent, and overflows via <code>/ratelimitstatus</code> command</li>
+                    <li><strong>No Configuration Required</strong> - Works automatically in the background - no setup needed!</li>
+                </ul>
+                <p><strong>Benefits:</strong> Prevents bot crashes from rate limit errors, ensures all messages are delivered, and provides visibility into rate limiting statistics.</p>
+            </section>
+
+            <section class="section">
+                <h2>🛠️ Utility Commands</h2>
+                <p>Comprehensive utility commands for bot management and information:</p>
+                <ul>
+                    <li><strong>/help</strong> - Display all available commands organized by category</li>
+                    <li><strong>/config</strong> - View current server configuration (log channel, colors, toggles, modmail)</li>
+                    <li><strong>/testlog</strong> - Send a test embed to verify logging is working</li>
+                    <li><strong>/checkperms</strong> - Check bot permissions in the server</li>
+                    <li><strong>/botinfo</strong> - View bot status, uptime, latency, and statistics</li>
+                    <li><strong>/ratelimitstatus</strong> - View rate limiting statistics and queue information</li>
+                </ul>
             </section>
 
             <section class="section">

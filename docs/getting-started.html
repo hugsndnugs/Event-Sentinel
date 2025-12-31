@@ -123,6 +123,10 @@
                     <li>Add or remove a role</li>
                 </ul>
                 <p>You should see a detailed log message appear in your configured log channel!</p>
+
+                <div class="info-box" style="background: #E8F5E9; border-left: 4px solid #4CAF50; padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                    <p><strong>⚡ Rate Limiting:</strong> Event Sentinel includes an automatic rate limiting system that prevents Discord API errors. This works in the background - no setup required! If messages seem delayed, they may be queued due to rate limits. Use <code>/ratelimitstatus</code> to monitor rate limiting statistics.</p>
+                </div>
             </section>
 
             <section class="section">
@@ -134,6 +138,7 @@
                     <li>Select a different log channel for each server (or use the same channel name - it's up to you!)</li>
                 </ol>
                 <p><strong>Note:</strong> Each server's configuration is completely separate. Changing the log channel in one server won't affect the others.</p>
+                <p><strong>Automatic Cleanup:</strong> If you remove Event Sentinel from a server, all configuration data (log channels, event toggles, embed colors, modmail config) is automatically cleaned up. When you add the bot back, you'll need to reconfigure it.</p>
             </section>
 
             <section class="section">
@@ -193,6 +198,8 @@
                 <h3>How It Works</h3>
                 <ol>
                     <li>Users send a direct message to Event Sentinel</li>
+                    <li>If the user is in multiple servers with modmail enabled, they'll see a dropdown menu to select which server to contact</li>
+                    <li>The support server (if configured) is always shown first with a special indicator (🛟) for easy access</li>
                     <li>A thread is automatically created in your modmail channel</li>
                     <li>Staff members can respond in the thread</li>
                     <li>Users receive responses in their DMs</li>

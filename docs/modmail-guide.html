@@ -83,10 +83,12 @@
                 <h3>For Users</h3>
                 <ol>
                     <li>Users DM the bot to start a conversation</li>
-                    <li>If modmail is enabled in multiple servers, users select which server they want to contact</li>
+                    <li>If modmail is enabled in multiple servers, users will see a dropdown menu to select which server they want to contact</li>
+                    <li>The support server (if configured) appears first in the dropdown with a special indicator (🛟)</li>
                     <li>A new thread is automatically created in your modmail channel</li>
                     <li>Users can send messages, images, and files through DM</li>
                     <li>All messages are forwarded to the modmail thread where staff can see and respond</li>
+                    <li>Rate limiting is handled automatically - users don't need to worry about message delivery delays</li>
                 </ol>
 
                 <h3>For Moderators</h3>
@@ -103,6 +105,15 @@
 
             <section class="section">
                 <h2>Key Features</h2>
+
+                <h3>⚡ Rate Limiting Integration</h3>
+                <ul>
+                    <li>All modmail operations automatically use the rate limiting system</li>
+                    <li>Prevents Discord API rate limit errors for reliable message delivery</li>
+                    <li>Messages are queued and sent automatically when rate limits allow</li>
+                    <li>No configuration needed - works automatically in the background</li>
+                    <li>Staff can monitor rate limiting statistics using <code>/ratelimitstatus</code> if needed</li>
+                </ul>
 
                 <h3>📬 Automatic Thread Creation</h3>
                 <ul>
@@ -130,8 +141,10 @@
                 <h3>🎯 Multi-Server Support</h3>
                 <ul>
                     <li>The bot supports modmail across multiple servers</li>
-                    <li>Users can select which server to contact if they're in multiple servers with modmail enabled</li>
-                    <li>Support server (if configured) is always shown first with a special indicator 🛟</li>
+                    <li>Users in multiple servers with modmail enabled will see a dropdown menu to select which server they want to contact</li>
+                    <li>Support server (ID: 1431420578434256981, if configured) is always shown first with a special indicator 🛟 for easy access</li>
+                    <li>The dropdown makes it easy for users to choose the correct server when they're members of multiple communities</li>
+                    <li>User selection is remembered for the duration of their modmail session</li>
                 </ul>
             </section>
 

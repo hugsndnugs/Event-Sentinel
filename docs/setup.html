@@ -46,7 +46,7 @@
                             <li>Presence Intent</li>
                             <li>Server Members Intent</li>
                             <li>Message Content Intent</li>
-                            <li>Direct Messages Intent (required for modmail functionality)</li>
+                            <li><strong>Direct Messages Intent</strong> (required for modmail functionality - must be enabled for modmail to work)</li>
                         </ul>
                     </li>
                     <li>Copy your bot token (keep this secure!)</li>
@@ -62,11 +62,14 @@
                     <code>cp .env.example .env</code>
                 </div>
 
-                <h3>Add Bot Token</h3>
-                <p>Add your bot token to the <code>.env</code> file:</p>
+                <h3>Add Bot Token and Configuration</h3>
+                <p>Add your bot token and optional settings to the <code>.env</code> file:</p>
                 <div class="code-block">
-                    <code>DISCORD_TOKEN=your_bot_token_here</code>
+                    <code>DISCORD_TOKEN=your_bot_token_here<br>
+# Optional: Set custom bot status (format: playing:Game Name or watching:Something)<br>
+BOT_STATUS=watching:your servers</code>
                 </div>
+                <p><strong>BOT_STATUS Format:</strong> You can set a custom bot status using the format <code>type:message</code>. Supported types: <code>playing</code>, <code>watching</code>, <code>listening</code>, <code>streaming</code>. If no prefix is provided, defaults to <code>watching</code>.</p>
 
                 <h3>Create Configuration Files</h3>
                 <p>Choose one of the following configuration methods:</p>
@@ -119,13 +122,24 @@ cp -r config.example config</code>
                     <li>If you add the bot to multiple servers, repeat this command in each server to set up logging</li>
                 </ol>
                 <p><strong>Note:</strong> Each server has its own independent log channel configuration!</p>
+                
+                <h3>Dashboard Control (Optional)</h3>
+                <p>If you're running the bot in the support server, you can control the dashboard using:</p>
+                <ul>
+                    <li><code>/dashboard start</code> - Start/enable dashboard routes (owner only, support server only)</li>
+                    <li><code>/dashboard stop</code> - Stop/disable dashboard routes</li>
+                </ul>
+                <p><strong>Health Check Endpoint:</strong> The <code>/health</code> endpoint is always available, even when the dashboard is disabled. This allows monitoring systems to check bot status without requiring dashboard access.</p>
             </section>
 
             <section class="section">
                 <h2>5. Running the Bot</h2>
-                <p>Start the bot with:</p>
+                <p>Start the bot using one of these methods:</p>
                 <div class="code-block">
-                    <code>python main.py</code>
+                    <code># Method 1: Direct execution<br>
+python main.py<br><br>
+# Method 2: Run as module (recommended)<br>
+python -m .</code>
                 </div>
                 <p>The bot will start and display:</p>
                 <ul>
@@ -133,6 +147,7 @@ cp -r config.example config</code>
                     <li>Discord.py version</li>
                     <li>Current log channel (if configured)</li>
                 </ul>
+                <p><strong>Module Entry Point:</strong> The bot includes a <code>__main__.py</code> file that allows running it as a module with <code>python -m .</code>. This is the recommended method for production deployments.</p>
             </section>
 
             <section class="section">
@@ -160,15 +175,30 @@ cp -r config.example config</code>
             </section>
 
             <section class="section">
+                <h2>Architecture Overview</h2>
+                <p>The bot uses a modular cog-based structure with the following key components:</p>
+                <ul>
+                    <li><code>main.py</code> - Bot initialization and startup</li>
+                    <li><code>__main__.py</code> - Module entry point for running as <code>python -m .</code></li>
+                    <li><code>utils.py</code> - Shared utility functions</li>
+                    <li><code>rate_limiter.py</code> - Rate limiting system to prevent Discord API errors</li>
+                    <li><code>dashboard.py</code> - Web dashboard (optional, can be toggled on/off)</li>
+                    <li><code>cogs/</code> - Modular command and event handlers</li>
+                </ul>
+                <p>The rate limiting system automatically prevents Discord API rate limit errors and works in the background without any configuration.</p>
+            </section>
+
+            <section class="section">
                 <h2>Troubleshooting</h2>
                 <p>If you encounter issues, check:</p>
                 <ul>
                     <li>Bot has correct permissions in the server</li>
-                    <li>All required intents are enabled in the Developer Portal (including Direct Messages Intent for modmail)</li>
+                    <li>All required intents are enabled in the Developer Portal (including Direct Messages Intent for modmail - this is critical for modmail functionality)</li>
                     <li>Log channel is properly configured with <code>/setlogchannel</code></li>
                     <li>Bot has permission to send messages in the log channel</li>
                     <li>If using modmail, ensure the modmail channel has proper permissions (Send Messages, Embed Links, Create Public Threads, Send Messages in Threads)</li>
                     <li>Bot token is correct in the <code>.env</code> file</li>
+                    <li>If messages seem delayed, check <code>/ratelimitstatus</code> - they may be queued due to rate limits</li>
                 </ul>
             </section>
 
