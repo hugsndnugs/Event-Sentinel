@@ -30,7 +30,7 @@
             <h1>Configuration Guide</h1>
             <p>This guide covers both user-facing commands and advanced developer configuration options for Event Sentinel.</p>
 
-            <div class="info-box" style="background: #E3F2FD; border-left: 4px solid #2196F3; padding: 1rem; margin: 2rem 0; border-radius: 4px;">
+            <div class="info-box info-box-info">
                 <p><strong>👥 For Server Administrators:</strong> Most configuration can be done using the <code>/setlogchannel</code> command. See the <a href="getting-started.html">Getting Started</a> guide for simple setup instructions.</p>
                 <p style="margin-top: 0.5rem;"><strong>🚀 Using the Hosted Instance?</strong> <a href="https://discord.com/oauth2/authorize?client_id=1231420875899928597" target="_blank">Invite Event Sentinel to your server</a> and start configuring with commands - no setup required!</p>
             </div>
@@ -58,7 +58,7 @@
                 <h4>/setlogchannel</h4>
                 <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Set the log channel for this server</p>
                 <p>The primary command for setting up Event Sentinel. Select a channel where all event logs will be sent.</p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/setlogchannel</code> → Select channel from dropdown
                 </div>
                 <p><strong>Note:</strong> The bot must have "Send Messages" and "Embed Links" permissions in the selected channel.</p>
@@ -74,7 +74,7 @@
                     <li><code>server</code> - Server settings and invite events</li>
                     <li><code>role</code> - Role creation/update/delete events</li>
                 </ul>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/setcolor category:moderation color:E74C3C</code><br>
                     <code>/setcolor category:voice color:#9B59B6</code><br>
                     <code>/setcolor category:message color:0x2ECC71</code>
@@ -84,7 +84,7 @@
                 <h4>/setmodmailchannel</h4>
                 <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Set the channel for modmail threads</p>
                 <p>Configure which channel modmail threads will be created in. When users DM the bot, a thread will be created in this channel for staff to respond. Users in multiple servers can select which server to contact via a dropdown menu, with the support server always shown first with a special indicator (🛟).</p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/setmodmailchannel</code> → Select channel from dropdown
                 </div>
                 <p><strong>Required Permissions:</strong> The bot needs these permissions in the selected channel:</p>
@@ -99,7 +99,7 @@
                 <h4>/togglemail</h4>
                 <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Enable/disable modmail for this server</p>
                 <p>Control whether modmail is active for your server. When disabled, users won't be able to contact staff via DMs.</p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/togglemail enabled:true</code> - Enable modmail<br>
                     <code>/togglemail enabled:false</code> - Disable modmail
                 </div>
@@ -108,7 +108,7 @@
                 <h4>/closemodmail</h4>
                 <p><strong>Permission:</strong> Manage Threads | <strong>Description:</strong> Close the current modmail thread</p>
                 <p>Close and archive a modmail thread. This command can only be used within a modmail thread and requires the "Manage Threads" permission.</p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/closemodmail</code> - Close the current thread<br>
                     <code>/closemodmail reason:Issue resolved</code> - Close with a reason
                 </div>
@@ -122,42 +122,42 @@
                 <h4>/togglemoderation</h4>
                 <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Enable/disable moderation events</p>
                 <p>Available events: <code>member_ban</code>, <code>member_unban</code>, <code>member_join</code>, <code>member_remove</code>, <code>member_kick</code>, <code>nickname_change</code>, <code>timeout_set</code>, <code>timeout_removed</code>, <code>role_added</code>, <code>role_removed</code></p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/togglemoderation event_key:member_ban enabled:false</code>
                 </div>
 
                 <h4>/togglevoice</h4>
                 <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Enable/disable voice channel events</p>
                 <p>Available events: <code>self_mute</code>, <code>self_unmute</code>, <code>server_mute</code>, <code>server_unmute</code></p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/togglevoice event_key:self_mute enabled:false</code>
                 </div>
 
                 <h4>/togglemessage</h4>
                 <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Enable/disable message events</p>
                 <p>Available events: <code>message_delete</code>, <code>message_edit</code></p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/togglemessage event_key:message_delete enabled:false</code>
                 </div>
 
                 <h4>/togglechannel</h4>
                 <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Enable/disable channel/thread events</p>
                 <p>Available events: <code>channel_create</code>, <code>channel_delete</code>, <code>channel_update</code>, <code>thread_create</code>, <code>thread_delete</code>, <code>thread_update</code></p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/togglechannel event_key:thread_create enabled:false</code>
                 </div>
 
                 <h4>/togglerole</h4>
                 <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Enable/disable role events</p>
                 <p>Available events: <code>role_create</code>, <code>role_delete</code>, <code>role_update</code></p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/togglerole event_key:role_update enabled:false</code>
                 </div>
 
                 <h4>/toggleserver</h4>
                 <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Enable/disable server events</p>
                 <p>Available events: <code>guild_update</code>, <code>invite_create</code>, <code>invite_delete</code></p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/toggleserver event_key:invite_create enabled:false</code>
                 </div>
             </section>
@@ -174,28 +174,28 @@
                     <li>Custom embed colors (if any)</li>
                     <li>Event toggle overrides</li>
                 </ul>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/config</code>
                 </div>
 
                 <h4>/listeventtoggles</h4>
                 <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> View current event toggle overrides</p>
                 <p>Lists all events that have been enabled or disabled (shows only custom overrides, not defaults).</p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/listeventtoggles</code>
                 </div>
 
                 <h4>/botinfo</h4>
                 <p><strong>Permission:</strong> Anyone | <strong>Description:</strong> View bot status and information</p>
                 <p>Displays bot statistics including uptime, latency, server count, member count, and an invite link.</p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/botinfo</code>
                 </div>
 
                 <h4>/checkperms</h4>
                 <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Check bot permissions in this server</p>
                 <p>Verifies that the bot has all required permissions. Shows which permissions are present and which are missing, including log channel-specific permissions.</p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/checkperms</code>
                 </div>
 
@@ -209,7 +209,7 @@
                     <li>Per-channel queue status</li>
                     <li>Global rate limit statistics</li>
                 </ul>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/ratelimitstatus</code>
                 </div>
                 <p><strong>Use Cases:</strong> Monitor bot performance, troubleshoot message delivery issues, and verify rate limiting is working correctly.</p>
@@ -221,7 +221,7 @@
                 <h4>/testlog</h4>
                 <p><strong>Permission:</strong> Administrator | <strong>Description:</strong> Send a test embed to the log channel</p>
                 <p>Use this command to verify that logging is working correctly. Sends a test message to your configured log channel.</p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/testlog</code>
                 </div>
                 <p><strong>Use Cases:</strong></p>
@@ -234,7 +234,7 @@
                 <h4>/help</h4>
                 <p><strong>Permission:</strong> Anyone | <strong>Description:</strong> Show all available commands</p>
                 <p>Displays a help menu with all commands organized by category. This is the quickest way to see what commands are available.</p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/help</code>
                 </div>
             </section>
@@ -245,7 +245,7 @@
                 <h4>/closemodmail</h4>
                 <p><strong>Permission:</strong> Manage Threads | <strong>Description:</strong> Close the current modmail thread</p>
                 <p>Close and archive a modmail thread. This command can only be used within a modmail thread and requires the "Manage Threads" permission.</p>
-                <div class="code-block" style="background: #F5F5F5; padding: 1rem; border-radius: 5px; margin: 0.5rem 0;">
+                <div class="code-block-light">
                     <code>/closemodmail</code> - Close the current thread<br>
                     <code>/closemodmail reason:Issue resolved</code> - Close with a reason
                 </div>
@@ -339,8 +339,8 @@
                 <p>If you're a server administrator, check the Getting Started guide.</p>
                 <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
                     <a href="https://discord.com/oauth2/authorize?client_id=1231420875899928597" target="_blank" class="btn btn-primary">➕ Invite Event Sentinel</a>
-                    <a href="https://discord.gg/ZPsp7nzREX" target="_blank" class="btn" style="background: #57F287;">💬 Discord Support</a>
-                    <a href="getting-started.html" class="btn" style="background: #6C757D;">Getting Started Guide</a>
+                    <a href="https://discord.gg/ZPsp7nzREX" target="_blank" class="btn btn-success">💬 Discord Support</a>
+                    <a href="getting-started.html" class="btn btn-secondary">Getting Started Guide</a>
                 </div>
             </div>
         </div>
